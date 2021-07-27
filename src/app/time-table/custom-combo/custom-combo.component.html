@@ -1,0 +1,74 @@
+<div class="container" style="background-color: rgb(255, 238, 80)">
+
+    <br>
+
+    
+    <div class="form-row" *ngFor="let obj of dataarray; let i=index">
+        
+       <div class="form-group col-md-2">
+           <label style="font-weight: bold" >{{value}}  </label>
+           <label>{{obj.val1}}</label>
+           <!--
+           <input type="text" class="form-control" name ="val1{{i}}" [(ngModel)]="obj.val1"/>
+            -->
+        </div>
+
+
+        <div class="form-group col-md-3">
+            <label style="font-weight: bold" > {{obj.val4}} </label>
+         </div>
+ 
+
+       <div class="form-group col-md-5">
+        <label style="font-weight: bold">Student Count</label>
+        <!--
+        <input type="text" class="form-control" name ="val2{{i}}"  [(ngModel)]="obj.val2"/>
+        -->
+         <!--
+        <select class="form-control"  style="width:300px;"  ngModel name ="room{{i}}" #room="ngModel" [(ngModel)]= "obj.val2">
+            <option value="F"> Room1</option>
+            <option value="M"> Room2</option>
+            <option value="FM"> Room3</option>
+            <option value="SFM"> Room4</option>
+             <option *ngFor="let rooms of roomss" value ="{{rooms.val4}}"> {{rooms.val2+' ('+rooms.val3+'-'+rooms.val5+'-'+rooms.val6+')'}}</option>   
+        </select>
+        -->
+        <input type="text" class="form-control" name ="branch{{i}}" [(ngModel)]="obj.val5"/>
+      
+    </div>
+
+       <!--
+       <div class="form-group col-md-1">
+        <label style="font-weight: bold">Remove</label>
+        <button class="btn btn-danger" *ngIf="i!=0" (click)="remove(i)">-</button>
+       </div>
+
+
+       <div class="form-group col-md-2">
+        <label style="font-weight: bold">Discription</label>
+        <label style="font-weight: bold">{{obj.val2}}</label>
+       </div>
+       -->
+
+    </div>
+
+    <div class="form-row">
+
+        <!--
+        <div class="form-group col-md-3">
+            <span class="btn btn-danger" (click)="addOne()">Add(+)</span>
+           </div>
+         -->
+
+           <div class="form-group col-md-3">
+            <span class="btn btn-success" (click)="submitform()">Submit</span>
+           </div>
+
+           <div class="form-group col-md-3">
+            <span class="btn btn-danger" (click)="closeform()">close</span>
+           </div>
+
+    </div>
+    
+
+</div>

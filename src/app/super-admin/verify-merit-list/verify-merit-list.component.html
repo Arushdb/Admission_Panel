@@ -1,0 +1,51 @@
+<app-menue></app-menue>
+<br>
+<div class="container" >
+
+    <form>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="Program">Program</label>
+            </div>
+
+            <div class="form-group col-md-4">
+                <select  required   ngModel name = "Program" class="form-control" style="width:200px;"  (change)="OwnerProgramChange(Program.viewModel)" #Program="ngModel" [(ngModel)]= "courseObject.program_id">
+                    <option selected value="0">Please Select Program</option>
+                    <option *ngFor="let Program of ownerProgram" value ="{{Program.program_id}}"> {{Program.program_name}}</option>
+               </select>
+            <div class="alert alert-danger" *ngIf="Program.touched &&  !Program.valid">Valid Program is required</div>
+            </div>
+
+            <div class="form-group col-md-2">
+                <button  type="button" class="btn btn-success " (click)="viewMeritList()">view All</button>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label >{{valB}}</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label >{{entity_id}}</label>
+            </div>
+           
+           
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label >Application Number</label>
+            </div>
+            <div class="form-group col-md-4">
+                <input type="text"   #appNum  ngModel name = "appNo" #appNo="ngModel" class="form-control" placeholder="app no."  (keyup)="checkApp(appNo.viewModel)" autofocus>
+            </div>
+
+            <div class="form-group col-md-2">
+                <button  type="button" class="btn btn-success " (click)="viewMeritList2()">view merit</button>
+            </div>
+
+            <div class="form-group col-md-4">
+                <button  type="button" class="btn btn-success " (click)="viewMeritList3()">view computation</button>
+            </div>
+        </div>
+    </form>
+</div>

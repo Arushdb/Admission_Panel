@@ -1,0 +1,71 @@
+<app-menue></app-menue>
+<br>
+
+<div class="container">
+
+    <div class="card" >
+
+        <div class="card-header text-white bg-success mb-3" >
+            Enter CCA Marks
+           </div>
+
+           <student-info [myvariable]="inputValue" (myOutput)="getData($event)"></student-info>
+           <div #spinnerDiv>
+           <progress-spinner></progress-spinner>
+          </div>
+        <!--   <div class="container" style="background-color: #92a8d1">-->
+            <div class="container" >
+            <br>
+        <div class="form-row" >
+
+            <div class="form-group col-md-3">
+                <label >CCA marks</label>
+            </div>
+
+            <div class="form-group col-md-4">
+             <input type="number"   #marksVal   ngModel name = "marks" #marks="ngModel" class="form-control" placeholder="CCA marks" (keyup.enter)="EnterMarks(marks.viewModel)" autofocus >
+            </div>
+
+            <div class="form-group col-md-3">
+                <button  type="button" #but1 class="btn btn-success" (click)="EnterMarks(marks.viewModel)" >Enter Marks</button>
+            </div>
+    
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="form-row" >
+            <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageNCC()" >Show NCC</button>
+            </div>
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageNSS()" >Show NSS</button>
+           </div>
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageCCA()" >Show CCA</button>
+           </div>
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageSOCIAL()" >Show Social</button>
+           </div>
+           <!--
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showpdf()" >Show pdf</button>
+           </div>
+           -->
+    </div>
+
+    <!--
+   <div>
+    <img [src]="base64Image" />
+  </div>
+
+    <div style="height: 100%; width: 100%">
+        <pdf-viewer [src]="pdfPath" [render-text]="true" style="display: block;">
+        </pdf-viewer>
+    </div>
+    -->
+</div>
+

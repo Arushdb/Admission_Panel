@@ -1,0 +1,46 @@
+<app-menue></app-menue>
+
+<br>
+
+
+
+<div class="container" >
+
+<div class="card" >
+    <div class="card-header text-white bg-success mb-3" >
+        Merit List Process
+       </div>
+
+    <entity-program-selecter></entity-program-selecter>
+
+    <div #spinnerDiv class="form-group col-md-3">
+        <progress-spinner></progress-spinner>
+    </div>
+
+    <div class="container" >
+    <div class="form-row">
+
+        <div class="form-group col-md-2">
+            <button  type="button" class="btn btn-success " (click)="runMeritList()">Submit</button>
+        </div>
+
+        <div class="form-group col-md-2">
+            <button  type="button" class="btn btn-success " (click)="runMeritListforAll()">RUN All</button>
+        </div>
+
+        <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success " (click)="generateReport()">View</button>
+        </div>
+
+        <div>
+            <select class="form-control"  style="width:200px;" required ngModel name ="classification" #classification="ngModel" [(ngModel)]= "courseObject.courseClassification" (click)="ReportClassification(classification.viewModel)">
+                <option>-Please select-</option>
+                <option value="A"> program Componets</option>
+                <option value="B"> Components eligibility</option>
+                <option value="C"> Final Merit Components </option>
+            </select>
+        </div>
+    </div>
+</div>
+</div>
+</div>

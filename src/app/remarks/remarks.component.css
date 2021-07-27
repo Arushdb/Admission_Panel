@@ -1,0 +1,14 @@
+.red{
+    background-color:rgb(0,255,0) !important;
+    color: #000000 !important;
+ }
+
+ .rej{
+   background-color:rgb(255, 0, 212) !important;
+   color: #000000 !important;
+}
+ 
+ .normal{
+    background-color:rgb(255, 255, 255) !important;
+    color: #000000 !important;
+ }

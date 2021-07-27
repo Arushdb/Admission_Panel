@@ -1,0 +1,18 @@
+ <div class="container">
+    <table>
+      <tr>
+        <td>
+          <button style="width:100%" class="btn btn-primary" type="button" (click) ="close()" [mat-dialog-close]="false">Close</button>
+        </td>
+      </tr>
+    </table>
+
+    <div>
+      <img [src]="base64Image" />
+    </div>
+
+      <div style="height: 100%; width: 100%">
+          <pdf-viewer [src]="pdfPath" [render-text]="true" style="display: block;">
+          </pdf-viewer>
+      </div>
+  </div>

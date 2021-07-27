@@ -1,0 +1,45 @@
+<app-menue></app-menue>
+<br>
+
+<div class="container">
+
+    <div class="card" >
+
+        <div class="card-header text-white bg-success mb-3" >
+            Enter GD Marks
+           </div>
+
+           <student-info [myvariable]="inputValue" (myOutput)="getData($event)"></student-info>
+           
+           <div #spinnerDiv>
+           <progress-spinner></progress-spinner>
+          </div>
+          
+        <!--   <div class="container" style="background-color: #92a8d1">-->
+    <div class="container" >
+            <br>
+         <div class="form-row" >
+
+            <div class="form-group col-md-3">
+                <label >GD marks</label>
+            </div>
+
+            <div class="form-group col-md-4">
+             <input type="number"   #marksVal   ngModel name = "marks" #marks="ngModel" class="form-control" placeholder="GD marks" (keyup.enter)="EnterMarks(marks.viewModel)" autofocus >
+            </div>
+
+            <div class="form-group col-md-3">
+                <button  type="button" #but1 class="btn btn-success" (click)="EnterMarks(marks.viewModel)" >Enter Marks</button>
+            </div>
+    
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+<button  type="button" class="btn btn-success" (click)="showImage()" >Show Image</button>
+<img [src]="base64Image" />
+</div>

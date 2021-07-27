@@ -1,0 +1,19 @@
+<div class="container" >
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            <label for="Program">Program</label>
+        </div>
+
+        <div class="form-group col-md-4">
+            <select  required   ngModel name = "Program" class="form-control" style="width:200px;"   #Program="ngModel" [(ngModel)]= "courseObject.program_id" (change)="OwnerProgramChange(Program.viewModel)"> <!--(change)="OwnerProgramChange(Program.viewModel)"-->
+                <option selected value="0">Please Select Program</option>
+                <option *ngFor="let Program of ownerProgram" value ="{{Program.program_id}}"> {{Program.program_name}}</option>
+           </select>
+        </div>
+
+        <div class="form-group col-md-1">
+            <label >{{ValA}}</label>
+        </div>
+    </div>
+   
+</div>

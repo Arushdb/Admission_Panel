@@ -1,0 +1,82 @@
+<div class="container" >
+ 
+    <div class="card" >
+<!--
+        <div class="card-header text-white bg-success mb-3" >
+           Generate Admit Card
+          </div>
+-->
+          <div class="card-body">
+    
+    <form>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-1">
+                <label for="Faulty">Session</label>
+            </div>
+
+            <div class="form-group col-md-4">
+              
+                <select  required   ngModel name = "Session" class="form-control" style="width:200px;"   #Session="ngModel" [(ngModel)]= "courseObject.session" (change)="onsessionChange(Session.viewModel)" >
+        
+                    <option *ngFor="let session of sessionArray" value ="{{session.sessionDate}}"> {{session.sessionDate}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="Session.touched &&  !Session.valid">Session is required</div>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label >{{start}}</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label >{{end}}</label>
+            </div>
+           
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-1">
+                <label for="Faulty">Faulty</label>
+            </div>
+
+            <div class="form-group col-md-4">
+              
+                <select  required   ngModel name = "Faculty" class="form-control" style="width:200px;"  (change)="loadProgramCombo(Faculty.viewModel)" #Faculty="ngModel" [(ngModel)]= "courseObject.entityId" >
+                    <option selected value="0">Please Select faculty</option>
+                    <option *ngFor="let faculty of ownerFaculty" value ="{{faculty.entity_id}}"> {{faculty.entity_name}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="Faculty.touched &&  !Faculty.valid">Valid Faculty is required</div>
+            </div>
+
+            <div class="form-group col-md-1">
+                <label >{{valA}}</label>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-1">
+                <label for="Program">Program</label>
+            </div>
+
+            <div class="form-group col-md-4">
+                <select  required   ngModel name = "Program" class="form-control" style="width:200px;"  (change)="OwnerProgramChange(Program.viewModel)" #Program="ngModel" [(ngModel)]= "courseObject.program_id">
+                    <option selected value="0">Please Select Program</option>
+                    <option *ngFor="let Program of ownerProgram" value ="{{Program.program_id}}"> {{Program.program_name}}</option>
+               </select>
+            <div class="alert alert-danger" *ngIf="Program.touched &&  !Program.valid">Valid Program is required</div>
+            </div>
+
+            <div class="form-group col-md-1">
+                <label >{{valB}}</label>
+            </div>
+        </div>
+           
+
+        
+   </form>
+   </div>
+</div>
+
+</div>

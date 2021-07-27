@@ -1,0 +1,24 @@
+<div class="card-header bg-info"style ="text-align: left; font-weight:bold; color:white; font-size:20px;"> Please mention rejection reason
+</div>
+        <table style="border: 1px solid black; width: 100%;">
+         
+            <tr>
+                    <td  colspan="2" style ="text-align: left; font-weight:bold; color:black; font-size:20px; ">  {{subtitle}}
+                  
+                        <textarea rows="5" class="form-control" ngModel name = "syllabus" #syllabus="ngModel"  [(ngModel)]= "courseObject.Syllabus"  > </textarea>
+                      
+               <!--   <textarea rows="5" class="form-control" value={{data.outPutVal}} > </textarea>-->  
+                    </td> 
+           </tr>
+
+
+           <tr>
+                <td>
+                        <input class="form-control btn btn-primary" type ="button" value="{{value1}}" [mat-dialog-close]="syllabus.viewModel"  (click)="submitRemarks(syllabus.viewModel)" />
+                </td>
+                <td>
+                        <input class="form-control btn btn-primary" type ="button" [mat-dialog-close]=false (click)="closeDialog()"   value="{{value2}}" />
+                </td>
+           </tr>
+
+        </table>

@@ -1,0 +1,81 @@
+<div class="container" >
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="Faulty">Enter Application Number</label>
+        </div>
+
+        <div class="form-group col-md-4">
+            <input type="text"   #appNum  ngModel name = "appNo" #appNo="ngModel" class="form-control" placeholder="app no."  (keyup)="checkApp(appNo.viewModel)" autofocus>
+        </div>
+
+        <div #spinnerDiv class="form-group col-md-3">
+            <progress-spinner></progress-spinner>
+        </div>
+ 
+    </div>
+    
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="Program">Program</label>
+        </div>
+
+        <div class="form-group col-md-4">
+            <select  required   ngModel name = "Program" class="form-control" style="width:200px;"   #Program="ngModel" [(ngModel)]= "courseObject.program_id"> <!--(change)="OwnerProgramChange(Program.viewModel)"-->
+                <option selected value="0">Please Select Program</option>
+                <option *ngFor="let Program of ownerProgram" value ="{{Program.program_id}}"> {{Program.program_name}}</option>
+           </select>
+        </div>
+
+        <div class="form-group col-md-2">
+            <button type="button" class="btn btn-success" (click)="OwnerProgramChange(Program.viewModel)"> submit </button>
+        </div>
+    </div>
+
+        <div class="form-row">
+           
+        </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label >Application Number</label>
+        </div>
+
+        <div class="form-group col-md-1">
+            <label  #appNumber>{{applNo}}</label>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label >Applicant Name</label>
+        </div>
+        
+        <div class="form-group col-md-5">
+            <label style="font-weight:bold" >{{name}}</label>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label >Category</label>
+        </div>
+        
+        <div class="form-group col-md-1">
+            <label style="font-weight:bold">{{cat}}</label>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label >Merit Total</label>
+        </div>
+        
+        <div class="form-group col-md-5">
+            <label style="font-weight:bold" >{{meritTotal}}</label>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,178 @@
+<div class="container">
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+         <button style="width:100%" class="btn btn-primary" type="button" (click) ="close()" [mat-dialog-close]="false">Close</button>
+        </div>
+   </div>
+ 
+</div>
+
+
+<div class="container" style="background-color: rgb(255, 238, 80)">
+
+    <br>
+
+    
+    <div class="form-row" *ngFor="let obj of dataarray; let i=index">
+        
+       <div class="form-group col-md-2">
+           <label style="font-weight: bold" >Course Code</label>
+           <label>{{course_code1}}</label>
+           <!--
+           <input type="text" class="form-control" name ="val1{{i}}" [(ngModel)]="obj.val1"/>
+            -->
+        </div>
+
+       <div class="form-group col-md-6">
+        <label style="font-weight: bold">Select Room</label>
+        <!--
+        <input type="text" class="form-control" name ="val2{{i}}"  [(ngModel)]="obj.val2"/>
+        -->
+        <select class="form-control"  style="width:300px;"  ngModel name ="room{{i}}" #room="ngModel" [(ngModel)]= "obj.val2">
+            <!--
+            <option value="F"> Room1</option>
+            <option value="M"> Room2</option>
+            <option value="FM"> Room3</option>
+            <option value="SFM"> Room4</option>
+            -->
+            <option *ngFor="let rooms of roomss" value ="{{rooms.val4}}"> {{rooms.val2+' ('+rooms.val3+'-'+rooms.val5+'-'+rooms.val6+')'}}</option>
+        </select>
+       </div>
+
+       <div class="form-group col-md-1">
+        <label style="font-weight: bold">Remove</label>
+        <button class="btn btn-danger" *ngIf="i!=0" (click)="remove(i)">-</button>
+       </div>
+
+
+       <div class="form-group col-md-2">
+        <label style="font-weight: bold">Discription</label>
+        <label style="font-weight: bold">{{obj.val2}}</label>
+       </div>
+
+    </div>
+
+    <div class="form-row">
+
+        <div class="form-group col-md-3">
+            <span class="btn btn-danger" (click)="addOne()">Add(+)</span>
+           </div>
+       
+           <div class="form-group col-md-3">
+            <span class="btn btn-success" (click)="submitform()">Submit</span>
+           </div>
+
+    </div>
+    
+
+</div>
+
+
+<br>
+
+
+<div class="container" style="background-color: rgb(80, 191, 255)">
+    <br>
+    <div class="form-row" *ngFor="let obj of dataarray2; let i=index">
+        
+        <div class="form-group col-md-2">
+            <label style="font-weight: bold" >Course Code</label>
+            <label>{{course_code1}}</label>
+            <!--
+            <input type="text" class="form-control" name ="val1{{i}}" [(ngModel)]="obj.val1"/>
+             -->
+         </div>
+ 
+        <div class="form-group col-md-6">
+         <label style="font-weight: bold">Select Instructor</label>
+         <!--
+         <input type="text" class="form-control" name ="val2{{i}}"  [(ngModel)]="obj.val2"/>
+         -->
+         <select class="form-control"  style="width:300px;"  ngModel name ="inst{{i}}" #inst="ngModel" [(ngModel)]= "obj.val3">
+             <!--
+             <option value="F"> Room1</option>
+             <option value="M"> Room2</option>
+             <option value="FM"> Room3</option>
+             <option value="SFM"> Room4</option>
+             -->
+             <option *ngFor="let inst of Instructor" value ="{{inst.val4}}"> {{inst.val6}}</option>
+         </select>
+        </div>
+ 
+        <div class="form-group col-md-1">
+         <label style="font-weight: bold">Remove</label>
+         <button class="btn btn-danger" *ngIf="i!=0" (click)="remove1(i)">-</button>
+        </div>
+ 
+ 
+        <div class="form-group col-md-1">
+         <label style="font-weight: bold">Discription</label>
+         <label style="font-weight: bold">{{obj.val3}}</label>
+        </div>
+     </div>
+ 
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+        <span class="btn btn-danger" (click)="addOne1()">Add(+)</span>
+        </div>
+    
+        <div class="form-group col-md-3">
+        <span class="btn btn-success" (click)="submitform1()">Submit</span>
+       </div>
+    </div>
+
+</div>
+
+<br>
+
+
+
+<div class="container" style="background-color: rgb(80, 255, 182)">
+    <br>
+    <label style="font-weight: bold; color:crimson" >For Joint Lectures only</label>
+    <div class="form-row" *ngFor="let obj of dataarray3; let i=index">
+
+        <div class="form-group col-md-2">
+            <label style="font-weight: bold" >Course Code</label>
+            <label>{{course_code1}}</label>
+         </div>
+
+
+         <div class="form-group col-md-6">
+            <label style="font-weight: bold">Select program/branch/speci.</label>
+            <input type="text" class="form-control" name ="name{{i}}"  [(ngModel)]="obj.val1" readonly/>
+            <!--
+            <select class="form-control"  style="width:300px;"  ngModel name ="inst{{i}}" #inst="ngModel" [(ngModel)]= "obj.val3">
+                <option *ngFor="let inst of jointLectures" value ="{{inst.val2}}"> {{inst.val1}}</option>
+            </select>
+            -->
+           </div>
+
+           <div class="form-group col-md-1">
+            <label style="font-weight: bold">Remove</label>
+            <button class="btn btn-danger"  (click)="remove2(i)">-</button>
+           </div>
+
+           <div class="form-group col-md-2">
+            <label style="font-weight: bold" >Count</label>
+            <input type="number" class="form-control" name ="count{{i}}"  [(ngModel)]="obj.val4"/>
+         </div>
+
+    </div>
+
+
+    <div class="form-row">
+        <!--
+        <div class="form-group col-md-3">
+        <span class="btn btn-danger" (click)="addOne2()">Add(+)</span>
+        </div>
+        -->
+    
+        <div class="form-group col-md-3">
+        <span class="btn btn-success" (click)="submitform2()">Submit</span>
+       </div>
+    </div>
+
+</div>

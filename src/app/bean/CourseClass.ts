@@ -1,0 +1,45 @@
+export class CourseClass
+{
+    entityId:string;
+    program_id:string;
+    courseCode:string;
+    courseTitle:string;
+    courseClassification:string;
+    courseType:string;
+    activity:string;
+    courseCredit:string;
+    internalMarks:number=0;
+    externalMarks:number=0;
+    totalMarks:number ;
+    tutorials:number=0;
+    totalLecture:number;
+    totalTheory:number;
+    totalPractical:number;
+    entity_id:string;
+    entity_name:string;
+    unit:string;
+    Syllabus:String;
+    path:String;
+    session:String;
+    sessionDate:String;
+    session_start_date:String;
+    session_end_date:String;
+    select:boolean;
+    arrayObject:string;
+    flag:string;
+    wrongApp:String;
+    correctApp:String;
+    ETmarks:number;
+    semester_code:String;
+    semester_name:String;
+    room_name:String;
+    room_key:String;
+    room_capacity:String;
+    branch_id:String;
+    branch_name:String;
+    pck:string;
+    transferApp:string;
+    pass:string;
+    status:string;
+
+}

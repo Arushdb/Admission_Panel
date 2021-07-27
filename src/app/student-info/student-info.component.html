@@ -1,0 +1,60 @@
+
+<div class="container" >
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="Faulty">Enter Application Number</label>
+        </div>
+
+        <div class="form-group col-md-4">
+            <input type="text"   #appNum  ngModel name = "appNo" #appNo="ngModel" class="form-control" placeholder="app no."  (keyup)="checkApp(appNo.viewModel)" autofocus>
+           
+        </div>
+
+        <div class="form-group col-md-3">
+            <excel-report [myvariable]="inputValue" (myOutput)="getData1($event)"></excel-report>
+            <!--
+           <excel-report (myOutput)="getData1($event)"></excel-report>
+            -->
+       
+     
+        </div>
+
+        <div #spinnerDiv class="form-group col-md-3">
+            <progress-spinner></progress-spinner>
+        </div>
+        
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label >Application Number</label>
+        </div>
+
+        <div class="form-group col-md-1">
+            <label  #appNumber>{{applNo}}</label>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label >Applicant Name</label>
+        </div>
+        
+        <div class="form-group col-md-5">
+            <label style="font-weight:bold" >{{name}}</label>
+        </div>
+    </div>
+<!--
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label >Category</label>
+        </div>
+        
+        <div class="form-group col-md-1">
+            <label style="font-weight:bold">{{cat}}</label>
+        </div>
+    </div>
+-->
+
+</div>

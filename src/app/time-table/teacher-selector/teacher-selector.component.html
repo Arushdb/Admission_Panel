@@ -1,0 +1,75 @@
+<div class="container">
+
+    <div>
+        <button style="width:60%" class="btn btn-primary" (click)="loadCourseData()"   >Load Courses</button>
+        </div>
+    
+        <br>
+    
+        <div class="form-row">
+            <div class="form-group col-md-1">
+                <label for="course_code">Course Code</label>
+            </div>
+    
+            <div class="form-group col-md-4">
+                <select  ngModel name = "course_code" class="form-control" style="width:200px;"   #course_code="ngModel" [(ngModel)]= "courseObject.course_code" (change)="CourseChange(course_code.viewModel)"> <!--(change)="OwnerProgramChange(Program.viewModel)"-->
+                    <option *ngFor="let course of courseInfo" value ="{{course.val1}}"> {{course.val1}}</option>
+               </select>
+            </div>
+    
+            <div class="form-group col-md-4">
+                <label >{{ValA}}</label>
+            </div>
+        </div>
+    
+        <br>
+
+    <div class="form-row" *ngFor="let obj of dataarray; let i=index">
+        
+       <div class="form-group col-md-1">
+           <label style="font-weight: bold" >Course Code</label>
+           <label>{{course_code1}}</label>
+           <!--
+           <input type="text" class="form-control" name ="val1{{i}}" [(ngModel)]="obj.val1"/>
+            -->
+        </div>
+
+       <div class="form-group col-md-5">
+        <label style="font-weight: bold">Select Instructor</label>
+        <!--
+        <input type="text" class="form-control" name ="val2{{i}}"  [(ngModel)]="obj.val2"/>
+        -->
+        <select class="form-control"  style="width:300px;"  ngModel name ="room{{i}}" #room="ngModel" [(ngModel)]= "obj.val2">
+            <!--
+            <option value="F"> Room1</option>
+            <option value="M"> Room2</option>
+            <option value="FM"> Room3</option>
+            <option value="SFM"> Room4</option>
+            -->
+            <option *ngFor="let inst of Instructor" value ="{{inst.val4}}"> {{inst.val6}}</option>
+        </select>
+       </div>
+
+       <div class="form-group col-md-1">
+        <label style="font-weight: bold">Remove</label>
+        <button class="btn btn-danger" *ngIf="i!=0" (click)="remove(i)">-</button>
+       </div>
+
+
+       <div class="form-group col-md-1">
+        <label style="font-weight: bold">Discription</label>
+        <label style="font-weight: bold">{{obj.val2}}</label>
+       </div>
+
+    </div>
+
+    <div>
+     <span class="btn btn-danger" (click)="addOne()">+</span>
+    </div>
+
+    <div>
+     <span class="btn btn-success" (click)="submitform()">++</span>
+    </div>
+
+</div>
+

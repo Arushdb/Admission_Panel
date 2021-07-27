@@ -1,0 +1,142 @@
+<app-menue></app-menue>
+<!--
+<entity-selector></entity-selector>
+
+<dynamic-fields></dynamic-fields>
+
+<room-selector></room-selector>
+<teacher-selector></teacher-selector>
+-->
+
+<!--
+
+<mat-accordion>
+    <mat-expansion-panel>
+
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+             Select Faculty and Program
+            </mat-panel-title>
+            <mat-panel-description>
+             Verify and Add Course
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <entity-selector></entity-selector>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+             Fill/Verify Course Related Information
+            </mat-panel-title>
+            <mat-panel-description>
+             (* Leave un-attended, in case of Not Applied)
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <dynamic-fields></dynamic-fields>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Room Allotment (In Case of LAB only)
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <room-selector></room-selector>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Teacher Allotment
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <teacher-selector></teacher-selector>
+    </mat-expansion-panel>
+
+</mat-accordion>
+
+-->
+
+
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+
+<h3>Time Table Data to fill</h3>
+<div style="margin-bottom: 1em">
+    <button type="button" pButton icon="pi pi-chevron-up" (click)="openPrev()" style="margin-right:.25em"></button>
+    <button type="button" pButton icon="pi pi-chevron-down" (click)="openNext()"></button>
+</div>
+    
+<p-accordion [activeIndex]="index">
+    <p-accordionTab header=" Select Faculty and Program" >
+      <entity-selector></entity-selector>
+       
+    </p-accordionTab>
+    <p-accordionTab header="Fill/Verify Course Related Information">
+      <dynamic-fields></dynamic-fields>
+    </p-accordionTab>
+
+    <!--
+    <p-accordionTab header=" Room Allotment (In Case of LAB only)">
+      <room-selector></room-selector>
+    </p-accordionTab>
+    <p-accordionTab header="Teacher Allotment">
+      <teacher-selector></teacher-selector>
+    </p-accordionTab>
+    -->
+
+</p-accordion>
+
+
+
+
+
+
+<!--
+<p-accordion>
+    <p-accordionTab header="Header 1" [transitionOptions]="'0ms'">
+        <entity-selector></entity-selector>
+    </p-accordionTab>
+    <p-accordionTab header="Header 2" [transitionOptions]="'0ms'">
+        <dynamic-fields></dynamic-fields>
+    </p-accordionTab>
+    <p-accordionTab header="Header 3" [transitionOptions]="'0ms'">
+        <room-selector></room-selector>   
+    </p-accordionTab>
+</p-accordion>
+-->
+
+<!--
+<div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Collapsible Group Item #1
+          </button>
+        </h2>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+   
+  </div>
+-->
+
+

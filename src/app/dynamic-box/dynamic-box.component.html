@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="form-row" *ngFor="let obj of dataarray; let i=index">
+        
+       <div class="form-group col-md-2">
+           <label>Component</label>
+           <input type="text" class="form-control" name ="val1{{i}}" [(ngModel)]="obj.val1"/>
+       </div>
+
+       <div class="form-group col-md-2">
+        <label>Marks obtained</label>
+        <input type="text" class="form-control" name ="val2{{i}}"  [(ngModel)]="obj.val2"/>
+       </div>
+
+       <div class="form-group col-md-2">
+        <label>Total Marks</label>
+        <input type="text" class="form-control" name ="val3{{i}}" [(ngModel)]="obj.val3"/>
+       </div>
+
+       <div class="form-group col-md-2">
+        <label>Passing year</label>
+        <input type="text" class="form-control" name ="val4{{i}}" [(ngModel)]="obj.val4"/>
+       </div>
+
+       <div class="form-group col-md-2">
+        <label>College/UniversityName</label>
+        <input type="text" class="form-control" name ="val5{{i}}" [(ngModel)]="obj.val5"/>
+       </div>
+    </div>
+
+    <div>
+     <span class="btn btn-danger" (click)="add()">+</span>
+    </div>
+    <div>
+        <span class="btn btn-success" (click)="submitform()">++</span>
+       </div>
+
+</div>

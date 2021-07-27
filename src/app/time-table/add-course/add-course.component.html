@@ -1,0 +1,142 @@
+
+
+
+<div class="container" >
+
+    <div class="card" >
+
+        <div class="card-body">
+            <form>
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="Faulty">Course Code</label>
+                    </div>
+
+                    <div class="form-group col-md-6">
+              
+                        <p>Enter Course Code</p>
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" pInputText  ngModel name ="course_code" #course_code="ngModel" [(ngModel)]= "courseObject.val1"> 
+                           <!--
+                            <label for="float-input">Enter Course Code</label>-->
+                        </span>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <span class="btn btn-danger" (click)="closeform()">close</span>
+                       </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="Faulty">Lectures/LAB</label>
+                    </div>
+
+                    <div class="form-group col-md-4">
+              
+                        <P>Weekly hours</P>
+                        <span class="ui-float-label">
+                            <input id="float-input" type="number" size="30" pInputText ngModel name ="hours" #hours="ngModel" [(ngModel)]= "courseObject.val2"> 
+                           
+                           <!-- <label for="float-input">Weekly hours</label>-->
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="Faulty">Student count</label>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <P>Registerd student count</P>
+                        <span class="ui-float-label">
+                            <input id="float-input" type="number" size="30" pInputText  ngModel name ="count" #count="ngModel" [(ngModel)]= "courseObject.val3"> 
+                        </span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="Faulty">Room/Teacher</label>
+                    </div>
+
+                    <div class="form-group col-md-4">
+              
+                        <button class="btn btn-info" (click)="openGridforDataEntry(course_code.viewModel)"> allotment</button>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="Faulty">Lecture Type</label>
+                    </div>
+
+                    <div class="form-group col-md-4">
+              
+                        <select class="form-control"  style="width:150px;"  ngModel name ="activity" #activity="ngModel" [(ngModel)]= "courseObject.val4">
+                            <option value="T"> Theory</option>
+                            <option value="P"> Practical</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="Faulty">Mode</label>
+                    </div>
+
+                    <div class="form-group col-md-4">
+              
+                        <select class="form-control"  style="width:150px;"  ngModel name ="mode" #mode="ngModel" [(ngModel)]= "courseObject.val6">
+                            <option value="OFF"> Offline</option>
+                            <option value="ON"> Online</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+                        <label for="Faulty">Section</label>
+                    </div>
+
+                    <div class="form-group col-md-6">
+              <!--(change)="sectionCahnge(courseObject.val5,course_code.viewModel)"-->
+                        <select class="form-control"  style="width:250px;"  ngModel name ="section" #section="ngModel" [(ngModel)]= "courseObject.val5" >
+                            <option value="DS"> Default(Student count wise)</option>
+                            <option value="GS">Gender Wise</option>
+                            <option value="BS"> Branch wise</option>
+                            <option value="GB"> Gender/Branch Wise</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <span class="btn btn-success" (click)="submitform(course_code.viewModel,hours.viewModel,count.viewModel,activity.viewModel,section.viewModel,mode.viewModel)">submit</span>
+                       </div>
+
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

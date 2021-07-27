@@ -1,0 +1,115 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+    
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption" [style.display]="intBoard ? 'block' : 'none'">For Interview Board</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption9" [style.display]="gdBoard ? 'block' : 'none'">For GD Board</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption1" [style.display]="ccaBoard ? 'block' : 'none'">For CCA Board</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption2" [style.display]="ADMIN ? 'block' : 'none'">Admin</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption3" [style.display]="SuperADMIN ? 'block' : 'none'">Super Admin</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption4" [style.display]="clerkA ? 'block' : 'none'">UserType-A</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption5" [style.display]="clerkB ? 'block' : 'none'">UserType-B</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption6" [style.display]="clerkC ? 'block' : 'none'">UserType-C</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption7" [style.display]="TT ? 'block' : 'none'">TimeTable</button>
+        <button class="navbar-brand" mat-button [matMenuTriggerFor]="mainOption8" [style.display]="ONENT ? 'block' : 'none'">OnlineEntranceTest</button>
+        <mat-menu #mainOption="matMenu">
+        <button mat-menu-item (click)="enterInterviewMarks()"  >Enter Interview Marks</button>
+        </mat-menu>
+
+        <mat-menu #mainOption9="matMenu">
+            <button mat-menu-item (click)="enterGDMarks()"  >Enter GD Marks</button>
+            </mat-menu>
+
+        <mat-menu #mainOption1="matMenu">
+            <button mat-menu-item  (click)="enterCCAMarks()" >Enter CCA Marks</button>
+        </mat-menu>
+        <mat-menu #mainOption1="matMenu">
+            <button mat-menu-item  (click)="enterCCAMarks()" >Student Fee</button>
+        </mat-menu>
+
+
+        <mat-menu #mainOption7="matMenu">
+            <button mat-menu-item  (click)="TimeTable()" >Data Entry</button>
+        </mat-menu>
+
+        <mat-menu #mainOption8="matMenu">
+            <button mat-menu-item  (click)="OnlineEntranceTest()" >Online Entrance</button>
+        </mat-menu>
+
+        <mat-menu #mainOption2="matMenu">
+            <button mat-menu-item>VIEW MERIT LIST</button>
+            <button mat-menu-item>ALLOCATE SEATS IN MERIT</button>
+        </mat-menu>
+
+        <mat-menu #mainOption3="matMenu">
+            <button mat-menu-item (click)="generate_admit_card()">ADMIT-CARD GENERATE</button>
+            <button mat-menu-item (click)="entreanceTestRelated()">UploadEntranceTest</button>
+            <button mat-menu-item [matMenuTriggerFor]="mainOption3A" >COMPUTATION</button>
+            <button mat-menu-item [matMenuTriggerFor]="mainOption3B" >FINAL MERIT LIST</button>
+        </mat-menu>
+
+        <mat-menu #mainOption3A="matMenu">
+            <button mat-menu-item  (click)="runComputation()" >RUN COMPUTATION</button>
+            <button mat-menu-item (click)="verifyComputation()">VERIFY COMPUTATION RESULTS</button>
+        </mat-menu>
+
+        <mat-menu #mainOption3B="matMenu">
+            <button mat-menu-item (click)="runFinalMerit()" >RUN FINAL MERIT LIST</button>
+            <button mat-menu-item (click)="verifyMerit()" >VERIFY FINAL MERIT LIST</button>
+        </mat-menu>
+
+
+        <mat-menu #mainOption4="matMenu" >
+            <button mat-menu-item [matMenuTriggerFor]="mainOption4A">TYPE-A</button>
+        </mat-menu>
+
+        <mat-menu #mainOption4A="matMenu">
+            <button mat-menu-item (click)="generate_admit_card()">GENERATE ADMIT CARD</button>
+            <button mat-menu-item (click)="viewMarks()">VIEW MARKS STATUS</button>
+            <button mat-menu-item >ENTER OFF-LINE STUDENT</button>
+            <button mat-menu-item (click)="transferApplication()" >TRANSFER APPLICATION</button>
+            <button mat-menu-item  [matMenuTriggerFor]="mainOption4A1">OTHER INFORMATION</button>
+
+        </mat-menu>
+
+        <mat-menu #mainOption4A1="matMenu">
+            <button mat-menu-item (click)="viewMarks()" >VIEW MARKS STATUS</button>
+            <button mat-menu-item (click)="viewArbitrationReport()">VIEW STUDENT APPLICATION STATUS</button>
+        </mat-menu>
+
+
+
+        <mat-menu #mainOption5="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="mainOption5A">TYPE-B</button>
+        </mat-menu>
+
+
+
+        
+        <mat-menu #mainOption5A="matMenu">
+            <!--
+            <button mat-menu-item>I-CARD</button>
+           -->
+            <button mat-menu-item (click)="viewMarksfroCounselling()">For Counselling</button>
+
+        </mat-menu>
+
+        <mat-menu #mainOption6="matMenu">
+            <button mat-menu-item>TYPE-C</button>
+        </mat-menu>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+      
+              <li class="nav-item">
+                <label class="nav-link">{{user}}</label>
+              </li>
+      
+              <li class="nav-item active">
+                <a class="nav-link" (click)="logout()">Logout</a>
+              </li>
+              
+            </ul>
+          </div>
+    
+    </div>
+</nav>

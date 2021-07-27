@@ -1,0 +1,220 @@
+
+   
+
+
+
+<div class="container">
+
+    <p-card>
+        <p-header>
+            Please Select Course Related Information
+        </p-header>
+        
+<p-table [value]="studentInfo" [columns]="cols" dataKey="val1" editMode="row" >
+    <ng-template pTemplate="header">
+        <tr >
+            <th  style="width:5em">Course Code</th>
+            <th  style="width:6em">Lectures/LAB (Weekly) hours</th>
+            <th  style="width:4em">Student count</th>
+            <th  style="width:6em">Active</th>
+            <th  style="width:8em">Room/Teacher</th>
+            <th  style="width:6em">Lecture Type</th>
+            <th  style="width:6em">Section</th>
+            <th  style="width:6em">Modes</th>
+            <th  style="width:6em">Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+       <!-- <tr [pEditableRow]="rowData" [ngClass]="rowData.val4 == 'P' ? 'red' : 'normal'">-->
+        <tr [pEditableRow]="rowData">
+            <td >
+                {{rowData.val1}}
+            </td>
+            <!--<td [ngClass]="rowData.val2  > 2 ? 'old-car' : null">-->
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" class="form-control" style="width:100px;" [(ngModel)]="rowData.val2" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.val2}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td >
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" class="form-control" style="width:100px;" [(ngModel)]="rowData.val3" required>
+                <!--
+                        <select    style="width:100px;"  ngModel name = "roomData" class="form-control"   #roomData="ngModel" [(ngModel)]= "rowData.val3" (change)="OwnerProgramChange(roomData.viewModel)"> 
+                            <option selected value="0">Please Select Program</option>
+                            <option *ngFor="let RoomInfo of RoomInfo" value ="{{RoomInfo.val1}}"> {{RoomInfo.val7}}</option>
+                       </select>
+                 -->
+                        <!--
+                        <select class="form-control"  style="width:100px;"  ngModel name ="activity" #activity="ngModel" [(ngModel)]= "rowData.val3">
+                           
+                            <option value="Y"> Yes</option>
+                            <option value="N"> No</option>
+                        </select>
+                        -->
+                        <!--
+                        <p-dropdown [options]="RoomInfo" [(ngModel)]="rowData.val3" [style]="{'width':'100%'}"></p-dropdown>
+                         
+                        <input pInputText type="text" [(ngModel)]="rowData.val3">
+                       -->
+                        
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.val3}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+
+            <td >
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <select class="form-control"  style="width:100px;"  ngModel name ="activity" #activity="ngModel" [(ngModel)]= "rowData.val7">
+                           
+                            <option value="Y"> Yes</option>
+                            <option value="N"> No</option>
+                        </select>
+                        
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.val7}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+
+
+            <td >
+            
+                     <button class="btn btn-info" (click)="openGridforDataEntry(rowData.val1)"> allotment</button>
+              
+            </td>
+
+
+            <td >
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <!--
+                        <input pInputText type="text" [(ngModel)]="rowData.val4">
+                        -->
+                        <select class="form-control"  style="width:100px;"  ngModel name ="lectureType" #activity="ngModel" [(ngModel)]= "rowData.val4">
+                            <option value="T"> Theory</option>
+                            <option value="P"> Practical</option>
+                        </select>
+
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.val4}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+
+            <td >
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <!--
+                        <input pInputText type="text" [(ngModel)]="rowData.val5">
+                        -->
+                        <select class="form-control"  style="width:100px;"  ngModel name ="gender" #activity="ngModel" [(ngModel)]= "rowData.val5" (change)="sectionCahnge(rowData.val5,rowData)">
+                            <option value="DS"> Default(Student count wise)</option>
+                            <option value="GS">Gender Wise</option>
+                            <option value="BS"> Branch wise</option>
+                            <option value="GB"> Gender/Branch Wise</option>
+                        </select>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.val5}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <!--
+                        <input pInputText type="text" [(ngModel)]="rowData.val5">
+                        -->
+                        <select class="form-control"  style="width:100px;"  ngModel name ="on_off" #on_off="ngModel" [(ngModel)]= "rowData.val9" (change)="ON_OFFChange(rowData.val9,rowData)">
+                            <option value="OFF">OffLine</option>
+                            <option value="ON">Online</option>
+                        </select>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.val9}}
+                    </ng-template>
+                </p-cellEditor>
+
+            </td>
+            <td style="text-align:center" >
+                <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btn btn-primary" (click)="onRowEditInit(rowData)"></button>
+                <button *ngIf="editing" pButton  type="button" pSaveEditableRow  icon="pi pi-check" class="btn btn-success" style="margin-right: .5em" (click)="onRowEditSave(rowData)"></button>
+                <button *ngIf="editing" pButton  type="button" pCancelEditableRow  icon="pi pi-times" class="btn btn-danger" (click)="onRowEditCancel(rowData, ri)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+
+    <!--
+<p-table [value]="cars1">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Vin</th>
+            <th>Year</th>
+            <th>Brand</th>
+            <th>Color</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cars1>
+        <tr>
+            <td>{{cars1.val1}}</td>
+            <td>{{cars1.val2}}</td>
+            <td>{{cars1.val3}}</td>
+            <td>{{cars1.val4}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+-->
+
+
+
+
+
+
+
+
+<!--
+
+<p-table [value]="studentInfo">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-studentInfo>
+        <tr>
+            <td *ngFor="let col of cols">
+                    {{studentInfo[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+-->
+        <p-footer>
+            Verify all courses
+        </p-footer>
+        </p-card>
+
+        <div>
+            <button style="width:100%" class="btn btn-primary" (click)="getCourseData()" >show</button>
+        </div>
+</div>
+
