@@ -38,12 +38,15 @@ private UpdateFinalCandidate=this.urlName+"Admission_Panel/computation/UpdateFin
 private uu1=this.urlName+"Admission_Panel/computation/uploads.htm";
   private uploadETMarks=this.urlName+"Admission_Panel/cca_int/UploadET.htm";
   private EditETMarks=this.urlName+"Admission_Panel/cca_int/EditET.htm";
+  private distETMarks=this.urlName+"Admission_Panel/computation/distributETMarks.htm";
+  
+  
   constructor(private http: HttpClient) { }
 
 
   checkLogin(f)
   {
-    debugger;
+   
     let param=JSON.stringify
     ({
       userName:f.value.userName,
@@ -933,6 +936,24 @@ EditEntranceMarks()
  this.EditETMarks,para,this.httpOption
  )
 }
+
+distETmarks()
+  {
+   
+    // let param=JSON.stringify
+    // ({
+    //   userName:f.value.userName,
+    //   password:f.value.password
+    // });
+    // let para = new HttpParams({fromObject:{courseObject:param}});
+    let httpparam = new HttpParams();
+
+    return this.http.post
+    (
+    this.distETMarks,httpparam,this.httpOption
+    )
+  }
+
 
 
 upload(formData)

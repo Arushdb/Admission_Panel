@@ -115,4 +115,17 @@ export class RunComputationComponent implements OnInit {
        alert("processed status ="+this.genrateStatus[0].status);
     });
   }
+
+  distmarks(){
+    this.myService.distETmarks().subscribe(res=>{
+      debugger;
+    console.log(res[0].msg);
+    alert(res[0].msg);
+
+    },(error=>{
+      debugger;
+      alert("Error in marks distribution");
+    }));
+  }
+
 }

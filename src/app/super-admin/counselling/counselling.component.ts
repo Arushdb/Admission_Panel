@@ -30,8 +30,10 @@ export class CounsellingComponent implements OnInit {
   previewUrl:any = null;
   imageToShow:any;
   myURL:any;
-imageUrl = '/Admission_Panel/assets/img/';
-//   imageUrl = '/assets/img/';
+//imageUrl = '/Admission_Panel/assets/img/';
+
+
+   imageUrl = '/assets/img/';
    base64Image: any;
 
  ngOnInit() {
@@ -136,7 +138,7 @@ imageUrl = '/Admission_Panel/assets/img/';
 
  verify()
  {
- 
+ debugger;
    this.openConfirmDiaog("I checked all component marks, all entered marks are correct , record is verified.")
    .afterClosed()
    .subscribe(
@@ -221,24 +223,31 @@ showDummyImage()
 {
   this.getBase64ImageFromURL(this.imageUrl+"BLANK"+".jpg").subscribe(base64data => {
     console.log(base64data);
+    
     this.base64Image = 'data:image/jpg;base64,' + base64data;
   });
+}
+showImage1(){
+  this.base64Image=this.imageUrl+this.Appno+".jpeg";
 }
 
   showImage()
 {
+  debugger;
   this.getBase64ImageFromURL(this.imageUrl+this.Appno+".jpeg").subscribe(base64data => {
     console.log(base64data);
+    debugger;
     this.base64Image = 'data:image/jpg;base64,' + base64data;
   });
 }
 
 
 getBase64ImageFromURL(url: string) {
+  debugger;
   return Observable.create((observer: Observer<string>) => {
     let img = new Image();
     img.crossOrigin = 'Anonymous';
-    img.src = url;  img.src = url;
+    img.src = url;  //img.src = url;
     if (!img.complete) {
       img.onload = () => {
         observer.next(this.getBase64Image(img));
@@ -248,7 +257,8 @@ getBase64ImageFromURL(url: string) {
         observer.error(err);
         alert("Image Not found");
        // img.remove();
-       this.showDummyImage();
+       //this.showDummyImage();
+      
       };
     } else {
       observer.next(this.getBase64Image(img));
