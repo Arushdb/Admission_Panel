@@ -117,13 +117,16 @@ export class RunComputationComponent implements OnInit {
   }
 
   distmarks(){
+    this.spinnerDiv.nativeElement.hidden=false;
     this.myService.distETmarks().subscribe(res=>{
+      this.spinnerDiv.nativeElement.hidden=true;
       debugger;
     console.log(res[0].msg);
     alert(res[0].msg);
 
     },(error=>{
       debugger;
+      this.spinnerDiv.nativeElement.hidden=true;
       alert("Error in marks distribution");
     }));
   }
