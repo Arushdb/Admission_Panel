@@ -6,6 +6,7 @@ import { MenueComponent } from './menue/menue.component';
 const routes: Routes = [
   { path: 'interview', loadChildren: () => import('./interview-panel/interview-panel.module').then(m => m.InterviewPanelModule) },
   { path: 'cca', loadChildren: () => import('./cca-panel/cca-panel.module').then(m => m.CcaPanelModule) },
+
   { path: 'superAdmin', loadChildren: () => import('./super-admin/super-admin.module').then(m => m.SuperAdminModule) },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'login', loadChildren: () => import('./login-page/login-page.module').then(m => m.LoginPageModule) },

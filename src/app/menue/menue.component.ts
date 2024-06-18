@@ -119,6 +119,11 @@ export class MenueComponent implements OnInit {
     this.router1.navigate(['/cca']);
     
   }
+  verifyMarks()
+  {
+    this.router1.navigate(['/cca/verifyMarks']);
+    
+  }
 
   runComputation()
   {

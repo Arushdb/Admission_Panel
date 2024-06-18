@@ -1,0 +1,60 @@
+<app-menue></app-menue>
+<br>
+
+<div class="container" *ngIf="showcard">
+
+    <div class="card">
+
+        <div class="card-header text-white bg-success mb-3">
+            Verify Academic Marks
+        </div>
+
+        <form [formGroup]="applicantForm">
+            <div class="d-inline-flex flex-row align-items-start p-2 bd-highlight flex-wrap">
+                <div class="p-2 bd-highlight">
+                    <label>Application Number</label>
+                    <input type="text" formControlName="appno" class="form-control" (input)="onchange($event)"
+                        [ngClass]="{ 'is-invalid': submitted && f.appno.errors }" />
+                    <div *ngIf="submitted && f.appno.errors" class="invalid-feedback">
+                        <div *ngIf="f.appno.errors.required">Application Number is required</div>
+                    </div>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <label>Name of Applicant:</label>
+                    <label class="form-control"><b>{{appname}}</b></label>
+                </div>
+
+                <div class="p-2 bd-highlight">
+                    <label>Marks Status:</label>
+                    <label class="form-control"><b>{{mkstatus}}</b></label>
+                </div>
+
+                
+            </div>
+                <div class="form-row">
+                    <div class="text-left form-group col">
+                        <button type="submit" class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                        <button class="btn btn-primary mr-1" (click)="onCancel()">Cancel</button>
+                        <button  *ngIf="showbutton"  class="btn btn-primary mr-1" (click)="onTrue()">True Marks</button>
+                        <button  *ngIf="showbutton"  class="btn btn-primary mr-1" (click)="onWrong()">Wrong Marks</button>
+                        <input  type="text"  formControlName="reason" placeholder="Enter reason for wrong marks"   [(ngModel)]="reason" class="form-control" />
+                    </div>
+                
+            </div>
+        </form>
+
+
+    </div>
+
+
+    <div>
+
+        <ag-grid-angular #agGrid style="height:300px; width:100%;" [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef" [getRowStyle]="getRowStyle" [rowData]="rowData" rowSelection="single"
+            [gridOptions]="gridOptions" (selectionChanged)="onSelectionregChanged($event)"
+            suppressHorizontalScroll="true" [isRowSelectable]="isRowSelectable" (gridReady)="OngridReady($event)"
+            suppressRowClickSelection="suppressRowClickSelection" class="ag-theme-alpine"></ag-grid-angular>
+    </div>
+
+
+</div>

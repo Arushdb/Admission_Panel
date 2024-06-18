@@ -14,33 +14,38 @@ export class WebServiceService {
  // urlName="http://10.154.0.112:8089/";
  //urlName="http://admission.dei.ac.in:8085/";
  urlName="http://localhost:8080/";
-  private url=this.urlName+"admission_panel_server/login/checkLogin.htm";
-  private url1=this.urlName+"admission_panel_server/login/barCode.htm";
-  private getFacultyUrl=this.urlName+"admission_panel_server/login/loadEntity.htm";
-  private getprogram = this.urlName+"admission_panel_server/login/loadProgram.htm";
-  private getSemester = this.urlName+"admission_panel_server/login/LoadSemester.htm";
-  private getBranch = this.urlName+"admission_panel_server/login/LoadBranch.htm";
-  private getSessionDate =this.urlName+"admission_panel_server/login/getSessionDate.htm";
-  private generateAdmitCard =this.urlName+"admission_panel_server/admitcard/generateAdmitCard.htm"
-  private runComputation =this.urlName+"admission_panel_server/computation/runComputation.htm";
-  private transfer = this.urlName+"admission_panel_server/computation/TransferApplication.htm";
-  private runComputation01 =this.urlName+"admission_panel_server/computation/runComputationForAll.htm";
-  private meritListProcess =this.urlName+"admission_panel_server/computation/meritListProcess.htm"
-  private getstudent =this.urlName+"admission_panel_server/cca_int/viewData.htm";
-  private getstudentView =this.urlName+"admission_panel_server/cca_int/viewDataForArbitration.htm";
-  private getstudentViewforCounclling =this.urlName+"admission_panel_server/cca_int/viewDataForCouncelling.htm";
-  private DoOPeration =this.urlName+"admission_panel_server/cca_int/DoAction.htm";
-  private DoOPerationforBulk =this.urlName+"admission_panel_server/cca_int/BulkMarksPosting.htm";
-  private DoOPerationforBulk_GD =this.urlName+"admission_panel_server/cca_int/BulkMarksPosting_GD.htm";
-  private EditRecord =this.urlName+"admission_panel_server/cca_int/EditRecord.htm";
-private getStudentData =this.urlName+"admission_panel_server/cca_int/viewRecords.htm";
-private getCustomeData =this.urlName+"admission_panel_server/computation/getCustomeData.htm";
-private UpdateSCLcomponent =this.urlName+"admission_panel_server/computation/UpdateSCLcomponent.htm";
-private UpdateFinalCandidate=this.urlName+"admission_panel_server/computation/UpdateFinalCandidate.htm";
-private uu1=this.urlName+"admission_panel_server/computation/uploads.htm";
-  private uploadETMarks=this.urlName+"admission_panel_server/cca_int/UploadET.htm";
-  private EditETMarks=this.urlName+"admission_panel_server/cca_int/EditET.htm";
-  private distETMarks=this.urlName+"admission_panel_server/computation/distributETMarks.htm";
+  private url=this.urlName+"Admission_Panel/login/checkLogin.htm";
+  private url1=this.urlName+"Admission_Panel/login/barCode.htm";
+  private getFacultyUrl=this.urlName+"Admission_Panel/login/loadEntity.htm";
+  private getprogram = this.urlName+"Admission_Panel/login/loadProgram.htm";
+  private getSemester = this.urlName+"Admission_Panel/login/LoadSemester.htm";
+  private getBranch = this.urlName+"Admission_Panel/login/LoadBranch.htm";
+  private getSessionDate =this.urlName+"Admission_Panel/login/getSessionDate.htm";
+  private generateAdmitCard =this.urlName+"Admission_Panel/admitcard/generateAdmitCard.htm"
+  private runComputation =this.urlName+"Admission_Panel/computation/runComputation.htm";
+  private transfer = this.urlName+"Admission_Panel/computation/TransferApplication.htm";
+  private runComputation01 =this.urlName+"Admission_Panel/computation/runComputationForAll.htm";
+  private meritListProcess =this.urlName+"Admission_Panel/computation/meritListProcess.htm"
+  private getstudent =this.urlName+"Admission_Panel/cca_int/viewData.htm";
+  private getstudentView =this.urlName+"Admission_Panel/cca_int/viewDataForArbitration.htm";
+  private getstudentViewforCounclling =this.urlName+"Admission_Panel/cca_int/viewDataForCouncelling.htm";
+  private DoOPeration =this.urlName+"Admission_Panel/cca_int/DoAction.htm";
+  private DoOPerationforBulk =this.urlName+"Admission_Panel/cca_int/BulkMarksPosting.htm";
+  private DoOPerationforBulk_GD =this.urlName+"Admission_Panel/cca_int/BulkMarksPosting_GD.htm";
+  private EditRecord =this.urlName+"Admission_Panel/cca_int/EditRecord.htm";
+private getStudentData =this.urlName+"Admission_Panel/cca_int/viewRecords.htm";
+private getCustomeData =this.urlName+"Admission_Panel/computation/getCustomeData.htm";
+private UpdateSCLcomponent =this.urlName+"Admission_Panel/computation/UpdateSCLcomponent.htm";
+private UpdateFinalCandidate=this.urlName+"Admission_Panel/computation/UpdateFinalCandidate.htm";
+private uu1=this.urlName+"Admission_Panel/computation/uploads.htm";
+  private uploadETMarks=this.urlName+"Admission_Panel/cca_int/UploadET.htm";
+  private EditETMarks=this.urlName+"Admission_Panel/cca_int/EditET.htm";
+  private distETMarks=this.urlName+"Admission_Panel/computation/distributETMarks.htm";
+  
+  // Added by Arush on 17-06-2024
+  private url_getapplicantmarks=this.urlName+"Admission_Panel/verifymarks/getapplicantmarks.htm";
+  private url_updatestatus=this.urlName+"Admission_Panel/verifymarks/updatestatus.htm";
+  private url_validateIWlist=this.urlName+"Admission_Panel/verifymarks/validateiwlist.htm";
   
   
   constructor(private http: HttpClient) { }
@@ -524,7 +529,7 @@ this.UpdateFinalCandidate,para,this.httpOption
       application_number:app,
       creator:sessionStorage.getItem('userId')
     });
-
+debugger;
     let para = new HttpParams({fromObject:{courseObject:param}});
 
     return this.http.post
@@ -977,5 +982,55 @@ return this.http.post(this.uu1,formData)
 // }) 
 
 }
+
+// added by Arush on 17-06-2024
+getApplicantMarks(appno:string)
+{
+
+  debugger;
+  let param=JSON.stringify
+  ({
+    
+    employee_code:sessionStorage.getItem('employeeCode'),
+    panel_authority:sessionStorage.getItem('panel_authority'),
+     flag:"PE",
+    // course_code:sessionStorage.getItem('courseCode'),
+    user_id:sessionStorage.getItem('userId')
+  });
+
+  let para = new HttpParams();
+ para= para.set("application_number",appno);
+
+  return this.http.post
+ (
+ this.url_getapplicantmarks,para,this.httpOption
+ )
+}
+
+// added by Arush on 17-06-2024
+updatestatus(appno:string,code:string,reason:string)
+{
+let para = new HttpParams();
+ para= para.set("application_number",appno);
+ para= para.set("verificationStatusCode",code);
+ para= para.set("verificationStatusDesc",reason);
+
+  return this.http.post
+ (
+ this.url_updatestatus,para,this.httpOption
+ )
+}
+
+validatefromIWlist(appno:string)
+{
+let para = new HttpParams();
+ para= para.set("application_number",appno);
+ 
+  return this.http.post
+ (
+ this.url_validateIWlist,para,this.httpOption
+ )
+}
+
 
 }

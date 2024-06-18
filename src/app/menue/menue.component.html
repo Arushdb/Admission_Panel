@@ -20,11 +20,10 @@
             </mat-menu>
 
         <mat-menu #mainOption1="matMenu">
+            <button mat-menu-item  (click)="verifyMarks()" >Verify Marks</button>
             <button mat-menu-item  (click)="enterCCAMarks()" >Enter CCA Marks</button>
         </mat-menu>
-        <mat-menu #mainOption1="matMenu">
-            <button mat-menu-item  (click)="enterCCAMarks()" >Student Fee</button>
-        </mat-menu>
+       
 
 
         <mat-menu #mainOption7="matMenu">
@@ -34,7 +33,7 @@
         <mat-menu #mainOption8="matMenu">
             <button mat-menu-item  (click)="OnlineEntranceTest()" >Online Entrance</button>
         </mat-menu>
-
+ 
         <mat-menu #mainOption2="matMenu">
             <button mat-menu-item>VIEW MERIT LIST</button>
             <button mat-menu-item>ALLOCATE SEATS IN MERIT</button>

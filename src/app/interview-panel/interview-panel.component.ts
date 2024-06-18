@@ -75,46 +75,24 @@ export class InterviewPanelComponent implements OnInit {
 
   EnterMarks(val)
   {
-    var marks = new String(val) ;
-    if(+marks<=8)
-    {
-      this.spinnerDiv.nativeElement.hidden=false;
-      //console.log(val);
-    
-      this.myservice.insertMarks(val,this.Appno).subscribe
-      (
-        responce =>
-          {
-            this.studentInfo =Array.from(Object.keys(responce), k=>responce[k]);
-             if(this.studentInfo[0].update_status=="OK")
-             {
 
-              this.spinnerDiv.nativeElement.hidden=true;
-               this.stuComp.focusMehtod();
-               this.stuComp.ClearData();
-               this.marksVal.nativeElement.value=null;
-               this.marksVal.nativeElement.disabled=true;
-               this.but1.nativeElement.disabled=true;
-             }
-             else 
-             {
-             this.spinnerDiv.nativeElement.hidden=true;
-              alert("Error Occured please contact to Administrator!");
-              this.stuComp.focusMehtod();
-              this.stuComp.ClearData();
-              this.marksVal.nativeElement.value=null;
-              this.marksVal.nativeElement.disabled=true;
-              this.but1.nativeElement.disabled=true;
-             }
-            
-          }
-      );
-    }
-    else
-    {
+    this.myservice.validatefromIWlist(this.Appno).subscribe(
+      res=>{
+
+        console.log(res[0].count);
+        if(res[0].count!==0)
+        this.enterIWmarks(val);
+         else
+         alert("Invalid Application Number");
+       
       
-      alert(" Interview marks must be equal or less than 8");
-    }
+      },err=>{
+        console.log(err);
+      });
+
+    
+
+
   }
 
 
@@ -168,6 +146,54 @@ getBase64Image(img: HTMLImageElement) {
  // console.log(dataURL);
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
+
+
+
+enterIWmarks(val){
+
+  var marks = new String(val) ;
+  if(+marks<=8)
+  {
+    this.spinnerDiv.nativeElement.hidden=false;
+    //console.log(val);
+  
+    this.myservice.insertMarks(val,this.Appno).subscribe
+    (
+      responce =>
+        {
+          this.studentInfo =Array.from(Object.keys(responce), k=>responce[k]);
+           if(this.studentInfo[0].update_status=="OK")
+           {
+
+            this.spinnerDiv.nativeElement.hidden=true;
+             this.stuComp.focusMehtod();
+             this.stuComp.ClearData();
+             this.marksVal.nativeElement.value=null;
+             this.marksVal.nativeElement.disabled=true;
+             this.but1.nativeElement.disabled=true;
+           }
+           else 
+           {
+           this.spinnerDiv.nativeElement.hidden=true;
+            alert("Error Occured please contact to Administrator!");
+            this.stuComp.focusMehtod();
+            this.stuComp.ClearData();
+            this.marksVal.nativeElement.value=null;
+            this.marksVal.nativeElement.disabled=true;
+            this.but1.nativeElement.disabled=true;
+           }
+          
+        }
+    );
+  }
+  else
+  {
+    
+    alert(" Interview marks must be equal or less than 8");
+  }
+
+}
+
 
 // showPDF()
 // {
