@@ -26,7 +26,7 @@ export class VerifymarksComponent implements OnInit {
   mask: boolean = false;
   gridOptions: GridOptions;
   rowData:student[]=[];
-  
+  showspinner:boolean;
  
 
   displaygrid = false;
@@ -79,6 +79,7 @@ export class VerifymarksComponent implements OnInit {
 
   ngOnInit() {
 
+    this.showspinner=false;
     this.showcard=true;
     this.gridOptions = <GridOptions>{
       enableSorting: true,
@@ -160,13 +161,14 @@ this.gridOptions.columnDefs = this.columnDefs;
   onchange($event){
     this.rowData=[];
     this.appname="";
+    this.mkstatus="";
     this.showbutton=false;
   }
 
 getApplicantMarks(){
   this.showbutton=false;
  let appno =this.f.appno.value;
-  
+ this.showspinner=true;
   this.subs.add =   this.webservice.getApplicantMarks(appno).subscribe(
     
     (res:student[])=>{ 
@@ -178,12 +180,14 @@ getApplicantMarks(){
     this.mkstatus=this.rowData[0].verificationStatusCode;
     if (this.rowData.length>0)
         this.showbutton=true;
-
+    this.showspinner=false;
       
     },err=>{
       this.showbutton=false;
+      this.mkstatus="";
       this.appname="";
       console.log(err);
+      this.showspinner=false;
     });
 
 }
@@ -202,7 +206,7 @@ this.getApplicantMarks();
 }
 
 onTrue(){
-
+  this.mkstatus="";
   const dialogRef=  this.openConfirmDiaog("Please confirm");
   dialogRef.disableClose = true;
   this.subs.add=dialogRef.afterClosed().subscribe(result => {
@@ -212,7 +216,7 @@ if(result){
   let reason="";
 
 
-
+  this.showspinner=true;
   this.subs.add =   this.webservice.updatestatus(appno,code,reason).subscribe(
     
     (res)=>{ 
@@ -220,10 +224,12 @@ if(result){
     // this.rowData=res;
     //this.rowData=JSON.parse(res[0]);
     this.appname="";
+    this.showspinner=false;
     this.getApplicantMarks();
     
       console.log(res);
     },err=>{
+      this.showspinner=false;
       this.appname="";
       console.log(err);
     });
@@ -234,6 +240,7 @@ if(result){
  
 }
 onWrong(){
+  this.mkstatus="";
   let reason:string="";
   reason = String(this.f.reason.value);
 
@@ -250,15 +257,17 @@ if(result){
   let appno =this.f.appno.value;
   let code ="W";
   let reason= this.f.reason.value;
-
+  this.showspinner=true;
   this.subs.add =   this.webservice.updatestatus(appno,code,reason).subscribe(
     
     (res)=>{ 
     this.appname="";
+    this.showspinner=false;
     this.getApplicantMarks();
     
       console.log(res);
     },err=>{
+      this.showspinner=false;
       this.appname="";
       console.log(err);
     });
