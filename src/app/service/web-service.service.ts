@@ -987,7 +987,7 @@ return this.http.post(this.uu1,formData)
 getApplicantMarks(appno:string)
 {
 
-  debugger;
+  
   let param=JSON.stringify
   ({
     
@@ -997,9 +997,10 @@ getApplicantMarks(appno:string)
     // course_code:sessionStorage.getItem('courseCode'),
     user_id:sessionStorage.getItem('userId')
   });
-
+ let user = sessionStorage.getItem('userId');
   let para = new HttpParams();
  para= para.set("application_number",appno);
+ para= para.set("user",user);
 
   return this.http.post
  (
@@ -1010,10 +1011,12 @@ getApplicantMarks(appno:string)
 // added by Arush on 17-06-2024
 updatestatus(appno:string,code:string,reason:string)
 {
+  let user = sessionStorage.getItem('userId');
 let para = new HttpParams();
  para= para.set("application_number",appno);
  para= para.set("verificationStatusCode",code);
  para= para.set("verificationStatusDesc",reason);
+ para= para.set("user",user);
 
   return this.http.post
  (
