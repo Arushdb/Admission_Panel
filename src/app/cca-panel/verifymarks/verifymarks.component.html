@@ -50,9 +50,9 @@
     <div>
 
         <ag-grid-angular #agGrid style="height:300px; width:100%;" [columnDefs]="columnDefs"
-            [defaultColDef]="defaultColDef" [getRowStyle]="getRowStyle" [rowData]="rowData" rowSelection="single"
-            [gridOptions]="gridOptions" (selectionChanged)="onSelectionregChanged($event)"
-            suppressHorizontalScroll="true" [isRowSelectable]="isRowSelectable" (gridReady)="OngridReady($event)"
+            [defaultColDef]="defaultColDef"  [rowData]="rowData" 
+            [gridOptions]="gridOptions"             suppressHorizontalScroll="true" 
+             (gridReady)="OngridReady($event)"
             suppressRowClickSelection="suppressRowClickSelection" class="ag-theme-alpine"></ag-grid-angular>
     </div>
 
