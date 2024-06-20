@@ -68,13 +68,33 @@ export class CcaPanelComponent implements OnInit {
    
   }
 
+  validateIWlist(val){
+    this.myservice.validatefromIWlist(this.Appno).subscribe(
+      res=>{
+
+        console.log(res[0].count);
+        if(res[0].count!==0)
+        this.EnterMarks(val);
+         else{
+          alert("Invalid Application Number");
+         this.Appno="";
+         return;
+
+
+         }
+               
+      },err=>{
+        console.log(err);
+      });
+  }
+
   EnterMarks(val)
   {
     var marks = new String(val) ;
     if(+marks<=12)
     {
       this.spinnerDiv.nativeElement.hidden=false;
-      //console.log(val);
+      //console.log(val); 
     
       this.myservice.insertMarks(val,this.Appno).subscribe
       (

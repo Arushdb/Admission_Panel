@@ -82,8 +82,13 @@ export class InterviewPanelComponent implements OnInit {
         console.log(res[0].count);
         if(res[0].count!==0)
         this.enterIWmarks(val);
-         else
-         alert("Invalid Application Number");
+        else{
+          alert("Invalid Application Number");
+         this.Appno="";
+         return;
+
+
+         }
        
       
       },err=>{

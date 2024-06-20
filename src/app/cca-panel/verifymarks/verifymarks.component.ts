@@ -165,6 +165,26 @@ this.gridOptions.columnDefs = this.columnDefs;
     this.showbutton=false;
   }
 
+  validateIWlist(){
+    let appno =this.f.appno.value;
+    this.webservice.validatefromIWlist(appno).subscribe(
+      res=>{
+
+        console.log(res[0].count);
+        if(res[0].count!==0)
+        this.getApplicantMarks();
+         else{
+          alert("Invalid Application Number");
+         appno="";
+         return;
+
+
+         }
+               
+      },err=>{
+        console.log(err);
+      });
+  }
 getApplicantMarks(){
   this.showbutton=false;
  let appno =this.f.appno.value;
@@ -178,6 +198,9 @@ getApplicantMarks(){
     
     this.appname=this.rowData[0].first_name;
     this.mkstatus=this.rowData[0].verificationStatusCode;
+    this.mkstatus=this.rowData[0].verificationStatusCode;
+    this.f.reason.setValue(this.rowData[0].verificationStatusDesc);
+
     if (this.rowData.length>0)
         this.showbutton=true;
     this.showspinner=false;
@@ -199,13 +222,14 @@ onSubmit() {
     return;
 }
 this.submitted = true;
-
-this.getApplicantMarks();
+this.validateIWlist();
+//this.getApplicantMarks();
 
 
 }
 
 onTrue(){
+  
   this.mkstatus="";
   const dialogRef=  this.openConfirmDiaog("Please confirm");
   dialogRef.disableClose = true;
@@ -224,8 +248,10 @@ if(result){
     // this.rowData=res;
     //this.rowData=JSON.parse(res[0]);
     this.appname="";
+    this.onchange("");
+
     this.showspinner=false;
-    this.getApplicantMarks();
+        this.getApplicantMarks();
     
       console.log(res);
     },err=>{
@@ -240,11 +266,12 @@ if(result){
  
 }
 onWrong(){
+  
   this.mkstatus="";
   let reason:string="";
   reason = String(this.f.reason.value);
 
-  if (reason==='undefined'){
+  if (reason==='undefined' || reason===""){
     alert("Please enter reason");
     return;
   }
@@ -262,13 +289,17 @@ if(result){
     
     (res)=>{ 
     this.appname="";
+    reason="";
+    this.onchange("");
     this.showspinner=false;
+    
     this.getApplicantMarks();
     
       console.log(res);
     },err=>{
       this.showspinner=false;
       this.appname="";
+      reason="";
       console.log(err);
     });
 
