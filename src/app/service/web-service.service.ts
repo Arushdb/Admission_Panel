@@ -12,8 +12,8 @@ export class WebServiceService {
  // urlName="http://10.3.7.79:8081/";
  //urlName="http://125.17.153.215:8089/";
  // urlName="http://10.154.0.112:8089/";
- //urlName="http://admission.dei.ac.in:8085/";
- urlName="http://localhost:8080/";
+ urlName="https://admission.dei.ac.in:8085/";
+ //urlName="http://localhost:8080/";
   private url=this.urlName+"admission_panel_server/login/checkLogin.htm";
   private url1=this.urlName+"admission_panel_server/login/barCode.htm";
   private getFacultyUrl=this.urlName+"admission_panel_server/login/loadEntity.htm";
