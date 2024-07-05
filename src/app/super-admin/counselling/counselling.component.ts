@@ -59,7 +59,9 @@ export class CounsellingComponent implements OnInit {
    this.Appno=value[0].application_number;
    this.regNo=value[0].registration_number;
   // console.log(this.regNo);
-   if (value[0].eligibility_status=="INS")
+// ARush on 04-07 for changes in marks for Edrp Team
+  // if (value[0].eligibility_status=="INS")
+   if (value[0].eligibility_status=="JOT")
    {
 
       //open verify and update
