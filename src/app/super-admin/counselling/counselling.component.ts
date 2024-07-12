@@ -83,7 +83,7 @@ export class CounsellingComponent implements OnInit {
       this.but2="Update(closed)";
    }
 
-   if (value[0].eligibility_status=="UPD")
+   if (value[0].eligibility_status=="VQE")
    {
       //open  update
       this.butControl="OK";
