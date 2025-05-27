@@ -57,8 +57,8 @@ export class WebServiceService {
   private uu1 = this.urlName + "Admission_Panel/computation/uploads.htm";
   private uploadETMarks = this.urlName + "Admission_Panel/cca_int/UploadET.htm";
   private EditETMarks = this.urlName + "Admission_Panel/cca_int/EditET.htm";
-  private distETMarks =
-    this.urlName + "Admission_Panel/computation/distributETMarks.htm";
+  // private distETMarks =
+  //   this.urlName + "Admission_Panel/computation/distributETMarks.htm";
 
   // Added by Arush on 17-06-2024
   private url_getapplicantmarks =
@@ -67,6 +67,17 @@ export class WebServiceService {
     this.urlName + "Admission_Panel/verifymarks/updatestatus.htm";
   private url_validateIWlist =
     this.urlName + "Admission_Panel/verifymarks/validateiwlist.htm";
+
+  //Added by Manpreet on 19-05-2025
+  private url_distETMarks =
+   this.urlName + "Admission_Panel/distribution/distributEntranceTestMarks.htm";
+   private url_generateInterviewList =
+   this.urlName + "Admission_Panel/distribution/generateInterviewList.htm";
+   private url_bindApplications =
+   this.urlName + "Admission_Panel/distribution/bindApplications.htm";
+   private url_entranceTestData =
+   this.urlName + "Admission_Panel/distribution/populateEntranceTestList.htm";
+   
 
   constructor(private http: HttpClient) {}
 
@@ -683,17 +694,7 @@ export class WebServiceService {
     return this.http.post(this.EditETMarks, para, this.httpOption);
   }
 
-  distETmarks() {
-    // let param=JSON.stringify
-    // ({
-    //   userName:f.value.userName,
-    //   password:f.value.password
-    // });
-    // let para = new HttpParams({fromObject:{courseObject:param}});
-    let httpparam = new HttpParams();
 
-    return this.http.post(this.distETMarks, httpparam, this.httpOption);
-  }
 
   upload(formData) {
     // let param=JSON.stringify
@@ -749,4 +750,33 @@ export class WebServiceService {
 
     return this.http.post(this.url_validateIWlist, para, this.httpOption);
   }
+
+  distETmarks1() {
+    let httpparam = new HttpParams();
+    alert("in distETmarks1");
+    return this.http.post(this.url_distETMarks, httpparam, this.httpOption);
+  }
+
+
+  generateInterviewList() {
+    let httpparam = new HttpParams();
+    alert("in generateInterviewList");
+    return this.http.post(this.url_generateInterviewList, httpparam, this.httpOption);
+  }
+
+  bindApplications() {
+    let httpparam = new HttpParams();
+    alert("in generateInterviewList");
+    return this.http.post(this.url_bindApplications, httpparam, this.httpOption);
+  }
+
+  
+
+  populateEntranceTestList() {
+    let httpparam = new HttpParams();
+    alert("in generateInterviewList");
+    return this.http.post(this.url_entranceTestData, httpparam, this.httpOption);
+  }
+
+
 }
