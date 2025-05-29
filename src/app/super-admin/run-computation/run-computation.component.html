@@ -1,65 +1,38 @@
 <app-menue></app-menue>
 
-<br>
+<br />
 
-
-
-<div class="container" >
-
-<div class="card" >
-    <div class="card-header text-white bg-success mb-3" >
-        Run Computation
-       </div>
+<div class="container">
+  <div class="card">
+    <div class="card-header text-white bg-success mb-3">Run Computation</div>
 
     <entity-program-selecter></entity-program-selecter>
 
     <div #spinnerDiv class="form-group col-md-3">
-        <progress-spinner></progress-spinner>
-    </div>
-    
-    <div class="container" >
-    <div class="form-row">
-
-        <div class="form-group col-md-2">
-            <button  type="button" class="btn btn-success " (click)="runComputation()">Submit</button>
-        </div>
-
-        <div class="form-group col-md-1">
-            <button  type="button" class="btn btn-success ">View</button>
-        </div>
-
-        <div class="form-group col-md-1">
-            <button  type="button" class="btn btn-success " (click)="genAdmitCard()">AdmitCard-01</button>
-        </div>
-
-       
-
+      <progress-spinner></progress-spinner>
     </div>
 
-    <div class="form-row">
-
+    <div class="container">
+      <div class="form-row">
         <div class="form-group col-md-2">
-            <button  type="button" class="btn btn-success " (click)="runComputation01()">Computation-01</button>
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="runComputation()"
+          >
+            Submit
+          </button>
         </div>
-
         <div class="form-group col-md-2">
-            <button  type="button" class="btn btn-success " (click)="interviewAll()">Interview-ALL</button>
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="runComputationALL()"
+          >
+            Compute ALL
+          </button>
         </div>
-
-        <div class="form-group col-md-2">
-            <button  type="button" class="btn btn-success " (click)="CCA_All()">CCA-ALL</button>
-        </div>
-
-        <div class="form-group col-md-2">
-            <button  type="button" class="btn btn-success " (click)="distmarks()">Distribute Entrance Test Marks</button>
-        </div>
-
-
-        
-        <div class="form-group col-md-2">
-            <button  type="button" class="btn btn-success " (click)="GD_All()">GD-ALL</button>
-        </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </div>

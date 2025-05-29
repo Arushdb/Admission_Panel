@@ -532,7 +532,7 @@ export class WebServiceService {
     return this.http.post(this.DoOPerationforBulk_GD, para, this.httpOption);
   }
 
-  runComputationProcess01() {
+  runComputationProcessALL() {
     let param = JSON.stringify({
       start_date: sessionStorage.getItem("start_date"),
       end_date: sessionStorage.getItem("end_date"),

@@ -1,134 +1,103 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { WebServiceService } from 'src/app/service/web-service.service';
-import { studentBean } from 'src/app/bean/studentBean';
-import { commonBean } from 'src/app/bean/commonBean';
-import { CourseClass } from 'src/app/bean/CourseClass';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { WebServiceService } from "src/app/service/web-service.service";
+import { studentBean } from "src/app/bean/studentBean";
+import { commonBean } from "src/app/bean/commonBean";
+import { CourseClass } from "src/app/bean/CourseClass";
 
 @Component({
-  selector: 'app-run-computation',
-  templateUrl: './run-computation.component.html',
-  styleUrls: ['./run-computation.component.css']
+  selector: "app-run-computation",
+  templateUrl: "./run-computation.component.html",
+  styleUrls: ["./run-computation.component.css"],
 })
 export class RunComputationComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private myService: WebServiceService,
+    private router1: ActivatedRoute
+  ) {}
+  genrateStatus: CourseClass[];
+  @ViewChild("spinnerDiv", { static: false }) spinnerDiv: ElementRef;
 
-  constructor(private router: Router,private myService:WebServiceService,private router1: ActivatedRoute) { }
-  genrateStatus:CourseClass[];
-  @ViewChild('spinnerDiv', {static: false}) spinnerDiv: ElementRef;
-
-  ngAfterViewInit()
-  {
-    this.spinnerDiv.nativeElement.hidden=true;
-  }
-  
-  ngOnInit() 
-  {
-   
+  ngAfterViewInit() {
+    this.spinnerDiv.nativeElement.hidden = true;
   }
 
-  genAdmitCard()
-  {
-    this.spinnerDiv.nativeElement.hidden=false;
-    this.myService.genAdmitCard()
-    .subscribe
-    (
-      (data) => 
-    {
-       this.genrateStatus = Array.from(Object.keys(data), k=>data[k]);
-       this.spinnerDiv.nativeElement.hidden=true;
-       alert("Total record processed="+this.genrateStatus[0].flag);
+  ngOnInit() {}
+
+  genAdmitCard() {
+    this.spinnerDiv.nativeElement.hidden = false;
+    this.myService.genAdmitCard().subscribe((data) => {
+      this.genrateStatus = Array.from(Object.keys(data), (k) => data[k]);
+      this.spinnerDiv.nativeElement.hidden = true;
+      alert("Total record processed=" + this.genrateStatus[0].flag);
     });
   }
 
-  runComputation()
-  {
-    this.spinnerDiv.nativeElement.hidden=false;
+  runComputation() {
+    this.spinnerDiv.nativeElement.hidden = false;
 
-    this.myService.runComputationProcess()
-    .subscribe
-    (
-      (data) => 
-    {
-       this.genrateStatus = Array.from(Object.keys(data), k=>data[k]);
-       this.spinnerDiv.nativeElement.hidden=true;
-       alert("Total record processed="+this.genrateStatus[0].flag);
+    this.myService.runComputationProcess().subscribe((data) => {
+      this.genrateStatus = Array.from(Object.keys(data), (k) => data[k]);
+      this.spinnerDiv.nativeElement.hidden = true;
+      alert("Total record processed=" + this.genrateStatus[0].flag);
     });
   }
 
-  runComputation01()
-  {
-    this.spinnerDiv.nativeElement.hidden=false;
+  runComputationALL() {
+    this.spinnerDiv.nativeElement.hidden = false;
 
-    this.myService.runComputationProcess01()
-    .subscribe
-    (
-      (data) => 
-    {
-       this.genrateStatus = Array.from(Object.keys(data), k=>data[k]);
-       this.spinnerDiv.nativeElement.hidden=true;
-       alert("Total record processed="+this.genrateStatus[0].flag);
+    this.myService.runComputationProcessALL().subscribe((data) => {
+      this.genrateStatus = Array.from(Object.keys(data), (k) => data[k]);
+      this.spinnerDiv.nativeElement.hidden = true;
+      alert("Total record processed=" + this.genrateStatus[0].flag);
     });
   }
 
+  interviewAll() {
+    this.spinnerDiv.nativeElement.hidden = false;
 
-  interviewAll()
-  {
-    this.spinnerDiv.nativeElement.hidden=false;
-
-    this.myService.BulkMarksProcess("PW")
-    .subscribe
-    (
-      (data) => 
-    {
-       this.genrateStatus = Array.from(Object.keys(data), k=>data[k]);
-       this.spinnerDiv.nativeElement.hidden=true;
-       alert("processed status ="+this.genrateStatus[0].status);
+    this.myService.BulkMarksProcess("PW").subscribe((data) => {
+      this.genrateStatus = Array.from(Object.keys(data), (k) => data[k]);
+      this.spinnerDiv.nativeElement.hidden = true;
+      alert("processed status =" + this.genrateStatus[0].status);
     });
   }
 
-  CCA_All()
-  {
-    this.spinnerDiv.nativeElement.hidden=false;
+  CCA_All() {
+    this.spinnerDiv.nativeElement.hidden = false;
 
-    this.myService.BulkMarksProcess("CA")
-    .subscribe
-    (
-      (data) => 
-    {
-       this.genrateStatus = Array.from(Object.keys(data), k=>data[k]);
-       this.spinnerDiv.nativeElement.hidden=true;
-       alert("processed status ="+this.genrateStatus[0].status);
+    this.myService.BulkMarksProcess("CA").subscribe((data) => {
+      this.genrateStatus = Array.from(Object.keys(data), (k) => data[k]);
+      this.spinnerDiv.nativeElement.hidden = true;
+      alert("processed status =" + this.genrateStatus[0].status);
     });
   }
 
-  GD_All()
-  {
-    this.spinnerDiv.nativeElement.hidden=false;
+  GD_All() {
+    this.spinnerDiv.nativeElement.hidden = false;
 
-    this.myService.BulkMarksProcess_GD("GD")
-    .subscribe
-    (
-      (data) => 
-    {
-       this.genrateStatus = Array.from(Object.keys(data), k=>data[k]);
-       this.spinnerDiv.nativeElement.hidden=true;
-       alert("processed status ="+this.genrateStatus[0].status);
+    this.myService.BulkMarksProcess_GD("GD").subscribe((data) => {
+      this.genrateStatus = Array.from(Object.keys(data), (k) => data[k]);
+      this.spinnerDiv.nativeElement.hidden = true;
+      alert("processed status =" + this.genrateStatus[0].status);
     });
   }
 
-  distmarks(){
-    this.spinnerDiv.nativeElement.hidden=false;
-    this.myService.distETmarks().subscribe(res=>{
-      this.spinnerDiv.nativeElement.hidden=true;
-      debugger;
-    console.log(res[0].msg);
-    alert(res[0].msg);
-
-    },(error=>{
-      debugger;
-      this.spinnerDiv.nativeElement.hidden=true;
-      alert("Error in marks distribution");
-    }));
+  distmarks() {
+    this.spinnerDiv.nativeElement.hidden = false;
+    this.myService.distETmarks().subscribe(
+      (res) => {
+        this.spinnerDiv.nativeElement.hidden = true;
+        debugger;
+        console.log(res[0].msg);
+        alert(res[0].msg);
+      },
+      (error) => {
+        debugger;
+        this.spinnerDiv.nativeElement.hidden = true;
+        alert("Error in marks distribution");
+      }
+    );
   }
-
 }
