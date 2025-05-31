@@ -15,58 +15,58 @@ export class WebServiceService {
   //urlName="http://125.17.153.215:8089/";
   // urlName="http://10.154.0.112:8089/";
   //urlName = "https://admission.dei.ac.in:8088/";
-  urlName = "http://localhost:8080/";
+  urlName = "http://10.151.0.80:8082/admission_panel_server";
 
-  private url = this.urlName + "Admission_Panel/login/checkLogin.htm";
-  private url1 = this.urlName + "Admission_Panel/login/barCode.htm";
-  private getFacultyUrl = this.urlName + "Admission_Panel/login/loadEntity.htm";
-  private getprogram = this.urlName + "Admission_Panel/login/loadProgram.htm";
-  private getSemester = this.urlName + "Admission_Panel/login/LoadSemester.htm";
-  private getBranch = this.urlName + "Admission_Panel/login/LoadBranch.htm";
+  private url = this.urlName + "/login/checkLogin.htm";
+  private url1 = this.urlName + "/login/barCode.htm";
+  private getFacultyUrl = this.urlName + "/login/loadEntity.htm";
+  private getprogram = this.urlName + "/login/loadProgram.htm";
+  private getSemester = this.urlName + "/login/LoadSemester.htm";
+  private getBranch = this.urlName + "/login/LoadBranch.htm";
   private getSessionDate =
-    this.urlName + "Admission_Panel/login/getSessionDate.htm";
+    this.urlName + "/login/getSessionDate.htm";
   private generateAdmitCard =
-    this.urlName + "Admission_Panel/admitcard/generateAdmitCard.htm";
+    this.urlName + "/admitcard/generateAdmitCard.htm";
   private runComputation =
-    this.urlName + "Admission_Panel/computation/runComputation.htm";
+    this.urlName + "/computation/runComputation.htm";
   private transfer =
-    this.urlName + "Admission_Panel/computation/TransferApplication.htm";
+    this.urlName + "/computation/TransferApplication.htm";
   private runComputation01 =
-    this.urlName + "Admission_Panel/computation/runComputationForAll.htm";
+    this.urlName + "/computation/runComputationForAll.htm";
   private meritListProcess =
-    this.urlName + "Admission_Panel/computation/meritListProcess.htm";
-  private getstudent = this.urlName + "Admission_Panel/cca_int/viewData.htm";
+    this.urlName + "/computation/meritListProcess.htm";
+  private getstudent = this.urlName + "/cca_int/viewData.htm";
   private getstudentView =
-    this.urlName + "Admission_Panel/cca_int/viewDataForArbitration.htm";
+    this.urlName + "/cca_int/viewDataForArbitration.htm";
   private getstudentViewforCounclling =
-    this.urlName + "Admission_Panel/cca_int/viewDataForCouncelling.htm";
-  private DoOPeration = this.urlName + "Admission_Panel/cca_int/DoAction.htm";
+    this.urlName + "/cca_int/viewDataForCouncelling.htm";
+  private DoOPeration = this.urlName + "/cca_int/DoAction.htm";
   private DoOPerationforBulk =
-    this.urlName + "Admission_Panel/cca_int/BulkMarksPosting.htm";
+    this.urlName + "/cca_int/BulkMarksPosting.htm";
   private DoOPerationforBulk_GD =
-    this.urlName + "Admission_Panel/cca_int/BulkMarksPosting_GD.htm";
-  private EditRecord = this.urlName + "Admission_Panel/cca_int/EditRecord.htm";
+    this.urlName + "/cca_int/BulkMarksPosting_GD.htm";
+  private EditRecord = this.urlName + "/cca_int/EditRecord.htm";
   private getStudentData =
-    this.urlName + "Admission_Panel/cca_int/viewRecords.htm";
+    this.urlName + "/cca_int/viewRecords.htm";
   private getCustomeData =
-    this.urlName + "Admission_Panel/computation/getCustomeData.htm";
+    this.urlName + "/computation/getCustomeData.htm";
   private UpdateSCLcomponent =
-    this.urlName + "Admission_Panel/computation/UpdateSCLcomponent.htm";
+    this.urlName + "/computation/UpdateSCLcomponent.htm";
   private UpdateFinalCandidate =
-    this.urlName + "Admission_Panel/computation/UpdateFinalCandidate.htm";
-  private uu1 = this.urlName + "Admission_Panel/computation/uploads.htm";
-  private uploadETMarks = this.urlName + "Admission_Panel/cca_int/UploadET.htm";
-  private EditETMarks = this.urlName + "Admission_Panel/cca_int/EditET.htm";
+    this.urlName + "/computation/UpdateFinalCandidate.htm";
+  private uu1 = this.urlName + "/computation/uploads.htm";
+  private uploadETMarks = this.urlName + "/cca_int/UploadET.htm";
+  private EditETMarks = this.urlName + "/cca_int/EditET.htm";
   private distETMarks =
-    this.urlName + "Admission_Panel/computation/distributETMarks.htm";
+    this.urlName + "/computation/distributETMarks.htm";
 
   // Added by Arush on 17-06-2024
   private url_getapplicantmarks =
-    this.urlName + "Admission_Panel/verifymarks/getapplicantmarks.htm";
+    this.urlName + "/verifymarks/getapplicantmarks.htm";
   private url_updatestatus =
-    this.urlName + "Admission_Panel/verifymarks/updatestatus.htm";
+    this.urlName + "/verifymarks/updatestatus.htm";
   private url_validateIWlist =
-    this.urlName + "Admission_Panel/verifymarks/validateiwlist.htm";
+    this.urlName + "/verifymarks/validateiwlist.htm";
 
   constructor(private http: HttpClient) {}
 
