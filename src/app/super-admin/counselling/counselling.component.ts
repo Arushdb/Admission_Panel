@@ -70,6 +70,7 @@ export class CounsellingComponent implements OnInit {
     //  console.log(value[0].application_number);
     this.Appno = value[0].application_number;
     this.regNo = value[0].registration_number;
+    
     // console.log(this.regNo);
     if (value[0].eligibility_status == "INS") {
       //open verify and update
@@ -156,6 +157,9 @@ export class CounsellingComponent implements OnInit {
 
               if (this.statusBean[0].val1 == "NOTOK") {
                 alert("record not saved");
+              }
+              if (this.statusBean[0].val1 == "NOTAUT") {
+                alert("You are not authorized");
               }
             });
         } else {
