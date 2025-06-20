@@ -49,7 +49,10 @@ inputValue="hello i am parent";
 
   checkApp(val)
   {
-  var appNumber = new String(val) ;
+    const autho = sessionStorage.getItem("Autho");
+    const appNumber = val.toString().trim();
+   // const appNumber = new String(val);
+ // var appNumber = new String(val) ;
   if (appNumber.length==6)
   {
     this.myservice.getStdentInfo(val).subscribe
@@ -64,7 +67,7 @@ inputValue="hello i am parent";
           this.cat=this.studentInfo[0].category;
           this.myOutput.emit(this.studentInfo);
       
-          if(this.studentInfo[0].marks_status=="P")
+          if(this.studentInfo[0].marks_status=="P"  && autho !== "ADM11")
           {
             alert("Marks are already submitted");
           }

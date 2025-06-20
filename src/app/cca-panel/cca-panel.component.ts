@@ -46,15 +46,19 @@ export class CcaPanelComponent implements OnInit {
 
   getData(value)
   {
+     const autho = sessionStorage.getItem("Autho");
     if(value[0].first_name!="")
     {
-      if(value[0].marks_status=="P")
+      const status = value[0].marks_status;
+    this.AppnoImage = value[0].application_number;
+      if(value[0].marks_status=="P"  && autho !== "ADM11")
       {
         this.marksVal.nativeElement.disabled=true;
         this.but1.nativeElement.disabled=true;
         this.AppnoImage=value[0].application_number;
       }
-      else if (value[0].marks_status=="A")
+     // else if (value[0].marks_status=="A")
+     else
       {
         this.Appno=value[0].application_number;
         this.marksVal.nativeElement.disabled=false;
