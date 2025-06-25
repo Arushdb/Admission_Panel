@@ -15,8 +15,8 @@ export class WebServiceService {
   //urlName="http://125.17.153.215:8089/";
   // urlName="http://10.154.0.112:8089/";
   //urlName = "https://admission.dei.ac.in:8088/";
-  //urlName = "https://admission.dei.ac.in/admission_panel_server"; //commented by Jyoti on 17 Jun
-  urlName = "http://localhost:8080/Admission_Panel"; //added by Jyoti on 17 Jun 2025
+  urlName = "https://admission.dei.ac.in/admission_panel_server"; 
+  //urlName = "http://localhost:8080/Admission_Panel"; // commented by Jyoti on 17 Jun 2025 
 
   private url = this.urlName + "/login/checkLogin.htm";
   private url1 = this.urlName + "/login/barCode.htm";
