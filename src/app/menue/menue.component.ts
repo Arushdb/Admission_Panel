@@ -17,7 +17,7 @@ export class MenueComponent implements OnInit {
   TT: boolean = false;
   ONENT: boolean = false;
   gdBoard: boolean = false;
-
+  deanUsr: boolean = false;
   user = "user@gmail.com";
   //instLogin:boolean;
   constructor(private router: ActivatedRoute, private router1: Router) {}
@@ -83,6 +83,8 @@ export class MenueComponent implements OnInit {
       this.clerkA = false;
       this.clerkB = false;
 
+    } else if (sessionStorage.getItem("Autho") == "DEAN") { //added by Jyoti for DEAN Users
+      this.deanUsr = true;
     }
 
     // this.clerkC=true;
@@ -122,6 +124,7 @@ export class MenueComponent implements OnInit {
   viewMarks() {
     this.router1.navigate(["/superAdmin/viewMarks"]);
   }
+  
   viewMarksfroCounselling(mode: String) {
     console.log(mode);
     this.router1.navigate(["/superAdmin/counselling"], {
@@ -129,6 +132,10 @@ export class MenueComponent implements OnInit {
     });
   }
 
+  verifyProgramListMenu(){
+    this.router1.navigate(["/superAdmin/verifyProgramList"]);   //added by Jyoti on 18 Jun 2025
+  }
+  
   runFinalMerit() {
     this.router1.navigate(["/superAdmin/runMerit"]);
   }

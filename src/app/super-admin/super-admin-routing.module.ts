@@ -10,6 +10,7 @@ import { VerifyComputationComponent } from './verify-computation/verify-computat
 import { TransferAppComponent } from './transfer-app/transfer-app.component';
 import { ViewMarksComponent } from './view-marks/view-marks.component';
 import { CounsellingComponent } from './counselling/counselling.component';
+import { VerifyProgramListComponent } from './verify-program-list/verify-program-list.component';
 
 const routes: Routes = [{ path: '', component: SuperAdminComponent },
 { path: 'runCompute', component: RunComputationComponent },
@@ -20,7 +21,7 @@ const routes: Routes = [{ path: '', component: SuperAdminComponent },
 { path: 'viewMarks', component: ViewMarksComponent },
 {path: 'verifyComputation', component: VerifyComputationComponent},
 {path: 'counselling', component: CounsellingComponent},
-
+{path: 'verifyProgramList', component:VerifyProgramListComponent}, //added by Jyoti on 18 Jun 2025
 ];
 
 @NgModule({

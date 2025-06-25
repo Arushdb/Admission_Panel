@@ -21,6 +21,8 @@ import {TabViewModule} from 'primeng/tabview';
 import {CodeHighlighterModule} from 'primeng/codehighlighter';
 import {ButtonModule} from 'primeng/button';
 import { CounsellingComponent } from './counselling/counselling.component';
+import { VerifyProgramListComponent } from './verify-program-list/verify-program-list.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { CounsellingComponent } from './counselling/counselling.component';
         MarksUploadComponent,
         TransferAppComponent,
         ViewMarksComponent,
-        CounsellingComponent],
+        CounsellingComponent,
+        VerifyProgramListComponent],
 
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import { CounsellingComponent } from './counselling/counselling.component';
     ToastModule,
     TabViewModule,
     CodeHighlighterModule,
-    ButtonModule
+    ButtonModule,
+    AgGridModule.withComponents([])
   ]
 })
 export class SuperAdminModule { }
