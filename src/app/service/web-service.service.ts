@@ -15,7 +15,8 @@ export class WebServiceService {
   //urlName="http://125.17.153.215:8089/";
   // urlName="http://10.154.0.112:8089/";
   //urlName = "https://admission.dei.ac.in:8088/";
-  urlName = "https://admission.dei.ac.in/admission_panel_server";
+  //urlName = "https://admission.dei.ac.in/admission_panel_server"; //commented by Jyoti on 17 Jun
+  urlName = "http://localhost:8080/Admission_Panel"; //added by Jyoti on 17 Jun 2025
 
   private url = this.urlName + "/login/checkLogin.htm";
   private url1 = this.urlName + "/login/barCode.htm";
@@ -67,6 +68,11 @@ export class WebServiceService {
     this.urlName + "/verifymarks/updatestatus.htm";
   private url_validateIWlist =
     this.urlName + "/verifymarks/validateiwlist.htm";
+  
+  private urlgetUserProgramlist = this.urlName + "/verifymarks/loadUserProgramCombo.htm"; //added by Jyoti on 19 Jun 2025
+  private urlgetvfyprogramlist = this.urlName + "/verifymarks/loadVfyProgramList.htm"; //added by Jyoti on 19 Jun 2025
+  private urlchkListStatus = this.urlName + "/verifymarks/chkListStatus.htm"; //added by Jyoti on 19 Jun 2025
+  private urlupdatePrglistVfyStatus = this.urlName + "/verifymarks/setPrglistVfyStatus.htm"; //added by Jyoti on 19 Jun 2025
 
   constructor(private http: HttpClient) {}
 
@@ -749,4 +755,39 @@ export class WebServiceService {
 
     return this.http.post(this.url_validateIWlist, para, this.httpOption);
   }
+
+  getUserProgramList() { //added by Jyoti on 18 Jun 2025 to verifyProgramList
+    let user_id = sessionStorage.getItem("userId");
+    let para = new HttpParams();
+    para = para.set("user", user_id);
+    return this.http.post(this.urlgetUserProgramlist, para, this.httpOption);
+  }
+
+  getvfyProgramList(prgId,listnum) { //added by Jyoti on 18 Jun 2025 to get verified application numbers of Program List
+    let user_id = sessionStorage.getItem("userId");
+    let para = new HttpParams();
+    para = para.set("program_id", prgId);
+    para = para.set("list_num", listnum);
+    para = para.set("user", user_id);
+    return this.http.post(this.urlgetvfyprogramlist, para, this.httpOption);
+  }
+  
+  chkListStatus(prgId,listnum) { //added by Jyoti on 18 Jun 2025 to get check List status
+    let user_id = sessionStorage.getItem("userId");
+    let para = new HttpParams();
+    para = para.set("program_id", prgId);
+    para = para.set("list_num", listnum);
+    para = para.set("user", user_id);
+    return this.http.post(this.urlchkListStatus, para, this.httpOption);
+  }
+  
+  updatePrgListVfyStatus(prgId,listnum) { //added by Jyoti on 18 Jun 2025 to update list verified status
+    let user_id = sessionStorage.getItem("userId");
+    let para = new HttpParams();
+    para = para.set("program_id", prgId);
+    para = para.set("list_num", listnum);
+    para = para.set("user", user_id);
+    return this.http.post(this.urlupdatePrglistVfyStatus, para, this.httpOption);
+  }
+
 }
