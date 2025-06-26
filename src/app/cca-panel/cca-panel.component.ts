@@ -80,7 +80,7 @@ export class CcaPanelComponent implements OnInit {
         if(res[0].count!==0)
         this.EnterMarks(val);
          else{
-          alert("Invalid Application Number");
+          alert("You are not authorized for this Application Number");
          this.Appno="";
          return;
 

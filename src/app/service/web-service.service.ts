@@ -749,8 +749,13 @@ export class WebServiceService {
   }
 
   validatefromIWlist(appno: string) {
+    let user = sessionStorage.getItem("userId");
+  let menu = sessionStorage.getItem("flag");
+
     let para = new HttpParams();
     para = para.set("application_number", appno);
+    para = para.set("user", user);
+    para = para.set("menu", menu);
     debugger;
 
     return this.http.post(this.url_validateIWlist, para, this.httpOption);
