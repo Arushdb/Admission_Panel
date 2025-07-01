@@ -24,33 +24,24 @@ export class WebServiceService {
   private getprogram = this.urlName + "/login/loadProgram.htm";
   private getSemester = this.urlName + "/login/LoadSemester.htm";
   private getBranch = this.urlName + "/login/LoadBranch.htm";
-  private getSessionDate =
-    this.urlName + "/login/getSessionDate.htm";
-  private generateAdmitCard =
-    this.urlName + "/admitcard/generateAdmitCard.htm";
-  private runComputation =
-    this.urlName + "/computation/runComputation.htm";
-  private transfer =
-    this.urlName + "/computation/TransferApplication.htm";
+  private getSessionDate = this.urlName + "/login/getSessionDate.htm";
+  private generateAdmitCard = this.urlName + "/admitcard/generateAdmitCard.htm";
+  private runComputation = this.urlName + "/computation/runComputation.htm";
+  private transfer = this.urlName + "/computation/TransferApplication.htm";
   private runComputation01 =
     this.urlName + "/computation/runComputationForAll.htm";
-  private meritListProcess =
-    this.urlName + "/computation/meritListProcess.htm";
+  private meritListProcess = this.urlName + "/computation/meritListProcess.htm";
   private getstudent = this.urlName + "/cca_int/viewData.htm";
-  private getstudentView =
-    this.urlName + "/cca_int/viewDataForArbitration.htm";
+  private getstudentView = this.urlName + "/cca_int/viewDataForArbitration.htm";
   private getstudentViewforCounclling =
     this.urlName + "/cca_int/viewDataForCouncelling.htm";
   private DoOPeration = this.urlName + "/cca_int/DoAction.htm";
-  private DoOPerationforBulk =
-    this.urlName + "/cca_int/BulkMarksPosting.htm";
+  private DoOPerationforBulk = this.urlName + "/cca_int/BulkMarksPosting.htm";
   private DoOPerationforBulk_GD =
     this.urlName + "/cca_int/BulkMarksPosting_GD.htm";
   private EditRecord = this.urlName + "/cca_int/EditRecord.htm";
-  private getStudentData =
-    this.urlName + "/cca_int/viewRecords.htm";
-  private getCustomeData =
-    this.urlName + "/computation/getCustomeData.htm";
+  private getStudentData = this.urlName + "/cca_int/viewRecords.htm";
+  private getCustomeData = this.urlName + "/computation/getCustomeData.htm";
   private UpdateSCLcomponent =
     this.urlName + "/computation/UpdateSCLcomponent.htm";
   private UpdateFinalCandidate =
@@ -58,21 +49,22 @@ export class WebServiceService {
   private uu1 = this.urlName + "/computation/uploads.htm";
   private uploadETMarks = this.urlName + "/cca_int/UploadET.htm";
   private EditETMarks = this.urlName + "/cca_int/EditET.htm";
-  private distETMarks =
-    this.urlName + "/computation/distributETMarks.htm";
+  private distETMarks = this.urlName + "/computation/distributETMarks.htm";
 
   // Added by Arush on 17-06-2024
   private url_getapplicantmarks =
     this.urlName + "/verifymarks/getapplicantmarks.htm";
-  private url_updatestatus =
-    this.urlName + "/verifymarks/updatestatus.htm";
-  private url_validateIWlist =
-    this.urlName + "/verifymarks/validateiwlist.htm";
-  
-  private urlgetUserProgramlist = this.urlName + "/verifymarks/loadUserProgramCombo.htm"; //added by Jyoti on 19 Jun 2025
-  private urlgetvfyprogramlist = this.urlName + "/verifymarks/loadVfyProgramList.htm"; //added by Jyoti on 19 Jun 2025
+  private url_updatestatus = this.urlName + "/verifymarks/updatestatus.htm";
+  private url_validateIWlist = this.urlName + "/verifymarks/validateiwlist.htm";
+
+  private urlgetUserProgramlist =
+    this.urlName + "/verifymarks/loadUserProgramCombo.htm"; //added by Jyoti on 19 Jun 2025
+  private urlgetvfyprogramlist =
+    this.urlName + "/verifymarks/loadVfyProgramList.htm"; //added by Jyoti on 19 Jun 2025
   private urlchkListStatus = this.urlName + "/verifymarks/chkListStatus.htm"; //added by Jyoti on 19 Jun 2025
-  private urlupdatePrglistVfyStatus = this.urlName + "/verifymarks/setPrglistVfyStatus.htm"; //added by Jyoti on 19 Jun 2025
+  private urlupdatePrglistVfyStatus =
+    this.urlName + "/verifymarks/setPrglistVfyStatus.htm"; //added by Jyoti on 19 Jun 2025
+  private urlgetSignature = this.urlName + "/verifymarks/getSignature.htm"; //added by Jyoti on 19 Jun 2025
 
   constructor(private http: HttpClient) {}
 
@@ -750,7 +742,7 @@ export class WebServiceService {
 
   validatefromIWlist(appno: string) {
     let user = sessionStorage.getItem("userId");
-  let menu = sessionStorage.getItem("flag");
+    let menu = sessionStorage.getItem("flag");
 
     let para = new HttpParams();
     para = para.set("application_number", appno);
@@ -761,14 +753,16 @@ export class WebServiceService {
     return this.http.post(this.url_validateIWlist, para, this.httpOption);
   }
 
-  getUserProgramList() { //added by Jyoti on 18 Jun 2025 to verifyProgramList
+  getUserProgramList() {
+    //added by Jyoti on 18 Jun 2025 to verifyProgramList
     let user_id = sessionStorage.getItem("userId");
     let para = new HttpParams();
     para = para.set("user", user_id);
     return this.http.post(this.urlgetUserProgramlist, para, this.httpOption);
   }
 
-  getvfyProgramList(prgId,listnum) { //added by Jyoti on 18 Jun 2025 to get verified application numbers of Program List
+  getvfyProgramList(prgId, listnum) {
+    //added by Jyoti on 18 Jun 2025 to get verified application numbers of Program List
     let user_id = sessionStorage.getItem("userId");
     let para = new HttpParams();
     para = para.set("program_id", prgId);
@@ -776,8 +770,9 @@ export class WebServiceService {
     para = para.set("user", user_id);
     return this.http.post(this.urlgetvfyprogramlist, para, this.httpOption);
   }
-  
-  chkListStatus(prgId,listnum) { //added by Jyoti on 18 Jun 2025 to get check List status
+
+  chkListStatus(prgId, listnum) {
+    //added by Jyoti on 18 Jun 2025 to get check List status
     let user_id = sessionStorage.getItem("userId");
     let para = new HttpParams();
     para = para.set("program_id", prgId);
@@ -785,14 +780,35 @@ export class WebServiceService {
     para = para.set("user", user_id);
     return this.http.post(this.urlchkListStatus, para, this.httpOption);
   }
-  
-  updatePrgListVfyStatus(prgId,listnum) { //added by Jyoti on 18 Jun 2025 to update list verified status
+
+  updatePrgListVfyStatus(prgId, listnum) {
+    //added by Jyoti on 18 Jun 2025 to update list verified status
     let user_id = sessionStorage.getItem("userId");
     let para = new HttpParams();
     para = para.set("program_id", prgId);
     para = para.set("list_num", listnum);
     para = para.set("user", user_id);
-    return this.http.post(this.urlupdatePrglistVfyStatus, para, this.httpOption);
+    return this.http.post(
+      this.urlupdatePrglistVfyStatus,
+      para,
+      this.httpOption
+    );
   }
 
+  // Arush on 27-06-2025 Verify Signature
+
+  verifySignature(appno) {
+    //added by Jyoti on 18 Jun 2025 to update list verified status
+    let user_id = sessionStorage.getItem("userId");
+    let para = new HttpParams();
+    para = para.set("application_number", appno);
+    //para = para.set("list_num", listnum);
+    para = para.set("user", user_id);
+    return this.http.get(this.urlgetSignature, {
+      params: para,
+      responseType: "blob",
+      withCredentials: true,
+    });
+    //return this.http.post(this.urlgetSignature, para, this.httpOption);
+  }
 }

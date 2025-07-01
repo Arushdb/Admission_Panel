@@ -1,0 +1,28 @@
+<app-menue></app-menue>
+<br />
+
+<div style="margin: 20px">
+  <form (ngSubmit)="onSubmit()">
+    <label for="appno">Enter Application Number:</label>
+    <input
+      type="text"
+      id="appno"
+      name="appno"
+      [(ngModel)]="userInput"
+      required
+    />
+    <button type="submit">Submit</button>
+  </form>
+
+  <p *ngIf="userInput">You typed: {{ userInput }}</p>
+</div>
+<!--
+<div *ngIf="imageUrl">
+  <h3>Signature:</h3>
+  <img
+    [src]="imageUrl"
+    alt="Generated Image"
+    style="border: 1px solid #ccc; max-width: 100%"
+  />
+</div>
+-->

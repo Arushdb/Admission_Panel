@@ -80,11 +80,15 @@
     >
       OnlineEntranceTest
     </button>
-    <button class="navbar-brand" mat-button
-      [matMenuTriggerFor]="mainOption7A" [style.display]="deanUsr ? 'block' : 'none'">
+    <button
+      class="navbar-brand"
+      mat-button
+      [matMenuTriggerFor]="mainOption7A"
+      [style.display]="deanUsr ? 'block' : 'none'"
+    >
       For DEAN
     </button>
-    
+
     <mat-menu #mainOption="matMenu">
       <button mat-menu-item (click)="enterInterviewMarks()">
         Enter Interview Marks
@@ -189,11 +193,11 @@
       <button mat-menu-item>TYPE-C</button>
     </mat-menu>
 
-
     <mat-menu #mainOption7A="matMenu">
       <button mat-menu-item (click)="verifyProgramListMenu()">
         VerifyProgramList
-      </button>      
+      </button>
+      <button mat-menu-item (click)="verifySignature()">VerifySignature</button>
     </mat-menu>
 
     <div class="collapse navbar-collapse" id="navbarResponsive">

@@ -1,8 +1,10 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { MenueComponent } from "./menue/menue.component";
+import { VerifySignatureComponent } from "./verify-signature/verify-signature.component";
 
 const routes: Routes = [
+  { path: "verifySignature", component: VerifySignatureComponent },
   {
     path: "interview",
     loadChildren: () =>

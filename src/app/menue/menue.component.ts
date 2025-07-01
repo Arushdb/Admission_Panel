@@ -75,15 +75,15 @@ export class MenueComponent implements OnInit {
       this.clerkB = true;
       //this.TT=true;
       // Added by Arush to allow edit marks on 29-04-2025
-    } else if (sessionStorage.getItem("Autho") == "ADM10"){
+    } else if (sessionStorage.getItem("Autho") == "ADM10") {
       this.ccaBoard = false;
       this.intBoard = false;
       this.ADMIN = true;
       this.SuperADMIN = false;
       this.clerkA = false;
       this.clerkB = false;
-
-    } else if (sessionStorage.getItem("Autho") == "DEAN") { //added by Jyoti for DEAN Users
+    } else if (sessionStorage.getItem("Autho") == "DEAN") {
+      //added by Jyoti for DEAN Users
       this.deanUsr = true;
     }
 
@@ -124,7 +124,7 @@ export class MenueComponent implements OnInit {
   viewMarks() {
     this.router1.navigate(["/superAdmin/viewMarks"]);
   }
-  
+
   viewMarksfroCounselling(mode: String) {
     console.log(mode);
     this.router1.navigate(["/superAdmin/counselling"], {
@@ -132,10 +132,10 @@ export class MenueComponent implements OnInit {
     });
   }
 
-  verifyProgramListMenu(){
-    this.router1.navigate(["/superAdmin/verifyProgramList"]);   //added by Jyoti on 18 Jun 2025
+  verifyProgramListMenu() {
+    this.router1.navigate(["/superAdmin/verifyProgramList"]); //added by Jyoti on 18 Jun 2025
   }
-  
+
   runFinalMerit() {
     this.router1.navigate(["/superAdmin/runMerit"]);
   }
@@ -159,5 +159,8 @@ export class MenueComponent implements OnInit {
 
   OnlineEntranceTest() {
     this.router1.navigate(["/ONENT"]);
+  }
+  verifySignature() {
+    this.router1.navigate(["/verifySignature"]);
   }
 }
