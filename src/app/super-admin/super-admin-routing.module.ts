@@ -20,7 +20,7 @@ const routes: Routes = [{ path: '', component: SuperAdminComponent },
 { path: 'transfer', component: TransferAppComponent },
 { path: 'viewMarks', component: ViewMarksComponent },
 {path: 'verifyComputation', component: VerifyComputationComponent},
-{path: 'counselling', component: CounsellingComponent},
+{path: 'counselling', component: CounsellingComponent, runGuardsAndResolvers: 'always'},
 {path: 'verifyProgramList', component:VerifyProgramListComponent}, //added by Jyoti on 18 Jun 2025
 ];
 

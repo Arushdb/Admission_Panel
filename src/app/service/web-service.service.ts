@@ -354,13 +354,15 @@ export class WebServiceService {
     return this.http.post(this.getstudent, para, this.httpOption);
   }
 
-  getStdentInfoforViewCouncelling(val) {
+  getStdentInfoforViewCouncelling(val, menu?: string) {
+    
     let param = JSON.stringify({
       employee_code: sessionStorage.getItem("EmployeeCode"),
       panel_authority: sessionStorage.getItem("Autho"),
       flag: sessionStorage.getItem("flag"),
       application_number: val,
       program_id: sessionStorage.getItem("program_id"),
+      called: menu,
     });
     let para = new HttpParams({ fromObject: { courseObject: param } });
 
