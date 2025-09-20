@@ -24,7 +24,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { RemarksComponent } from './remarks/remarks.component';
 import { RemarkDialogComponent } from './remark-dialog/remark-dialog.component';
 import { StudentViewCouncellingComponent } from './student-view-councelling/student-view-councelling.component';
-import { VerifySignatureComponent } from './verify-signature/verify-signature.component'; // optional, provides moment-style pipes for date formatting
+import { VerifySignatureComponent } from './verify-signature/verify-signature.component';
+//import { AdmitCardComponent } from './admit-card/admit-card.component'; // optional, provides moment-style pipes for date formatting
 //import {TableModule} from 'primeng/table';
 //import { CountdownModule } from 'ngx-countdown';
 
@@ -32,6 +33,7 @@ import { VerifySignatureComponent } from './verify-signature/verify-signature.co
   declarations: [
     AppComponent,
     VerifySignatureComponent,
+    //AdmitCardComponent,
    // StudentViewCouncellingComponent,
   //  RemarkDialogComponent,
    // ConfirmDialogComponent,

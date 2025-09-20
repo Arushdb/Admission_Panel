@@ -97,9 +97,7 @@ export class MenueComponent implements OnInit {
     this.router1.navigate(["/login"]);
   }
 
-  generate_admit_card() {
-    this.router1.navigate(["/genAdmitCard"]);
-  }
+
   enterInterviewMarks() {
     this.router1.navigate(["/interview"]);
   }
@@ -162,5 +160,9 @@ export class MenueComponent implements OnInit {
   }
   verifySignature() {
     this.router1.navigate(["/verifySignature"]);
+  }
+
+  generateAdmitCard() {
+    this.router1.navigate(["/superAdmin/generateAdmitCard"]); //added by Pragya on  03 Sep 2025
   }
 }

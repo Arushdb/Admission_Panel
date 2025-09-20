@@ -23,6 +23,7 @@ import {ButtonModule} from 'primeng/button';
 import { CounsellingComponent } from './counselling/counselling.component';
 import { VerifyProgramListComponent } from './verify-program-list/verify-program-list.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { GenerateAdmitCardComponent } from './generate-admit-card/generate-admit-card.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AgGridModule } from 'ag-grid-angular';
         TransferAppComponent,
         ViewMarksComponent,
         CounsellingComponent,
-        VerifyProgramListComponent],
+        VerifyProgramListComponent,
+        GenerateAdmitCardComponent],
 
   imports: [
     CommonModule,
