@@ -16,8 +16,8 @@ export class WebServiceService {
   //urlName="http://125.17.153.215:8089/";
   // urlName="http://10.154.0.112:8089/";
   //urlName = "https://admission.dei.ac.in:8088/";
- // urlName = "https://admission.dei.ac.in/admission_panel_server"; 
-  urlName = "http://localhost:8080/Admission_Panel"; // commented by Jyoti on 17 Jun 2025 
+  urlName = "https://admission.dei.ac.in/admission_panel_server"; 
+ // urlName = "http://localhost:8080/Admission_Panel"; // commented by Jyoti on 17 Jun 2025 
 
   private url = this.urlName + "/login/checkLogin.htm";
   private url1 = this.urlName + "/login/barCode.htm";
@@ -73,7 +73,10 @@ export class WebServiceService {
     this.urlName + "/generateAdmitCard/generateAdmitCard.htm";
   private getProgramListUrl =
     this.urlName + "/generateAdmitCard/getProgramList.htm"; // added by Pragya on 08 sep 2025
-   
+
+     // ---------------- QR Verifier endpoints ----------------
+ //private scanQrUrl = this.urlName + "/qr/scanQr.htm";
+//private markVerifiedUrl = this.urlName + "/qr/markVerified.htm";
    
 
   constructor(private http: HttpClient) {}
@@ -837,5 +840,7 @@ generateAdmitCardNew(programId: string): Observable<any> {
   return this.http.post(this.generateAdmitCardUrl, payload, this.httpOption);
 }
 
-
+ 
 }
+
+
