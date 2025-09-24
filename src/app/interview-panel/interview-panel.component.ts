@@ -157,7 +157,7 @@ getBase64Image(img: HTMLImageElement) {
 enterIWmarks(val){
 
   var marks = new String(val) ;
-  if(+marks<=8)
+  if(+marks<=18)
   {
     this.spinnerDiv.nativeElement.hidden=false;
     //console.log(val);
@@ -194,7 +194,7 @@ enterIWmarks(val){
   else
   {
     
-    alert(" Interview marks must be equal or less than 8");
+    alert(" Interview marks must be equal or less than 18");
   }
 
 }
