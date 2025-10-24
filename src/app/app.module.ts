@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';               // <-- Needed for [(ngModel)]
+import { HttpClientModule } from '@angular/common/http';   // <-- Needed for HttpClient
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,8 @@ import { CustomGridComponent } from './custom-grid/custom-grid.component';
 import { StudentViewComponent } from './student-view/student-view.component';
 import { ProgramSelectorComponent } from './program-selector/program-selector.component';
 import { DynamicBoxComponent } from './dynamic-box/dynamic-box.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
 import { MomentModule } from 'angular2-moment';
@@ -24,7 +28,10 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { RemarksComponent } from './remarks/remarks.component';
 import { RemarkDialogComponent } from './remark-dialog/remark-dialog.component';
 import { StudentViewCouncellingComponent } from './student-view-councelling/student-view-councelling.component';
-import { VerifySignatureComponent } from './verify-signature/verify-signature.component'; // optional, provides moment-style pipes for date formatting
+import { VerifySignatureComponent } from './verify-signature/verify-signature.component';
+import { QrVerifierComponent } from './qr-verifier/qr-verifier.component';
+
+//import { AdmitCardComponent } from './admit-card/admit-card.component'; // optional, provides moment-style pipes for date formatting
 //import {TableModule} from 'primeng/table';
 //import { CountdownModule } from 'ngx-countdown';
 
@@ -32,6 +39,9 @@ import { VerifySignatureComponent } from './verify-signature/verify-signature.co
   declarations: [
     AppComponent,
     VerifySignatureComponent,
+    QrVerifierComponent,
+    
+    //AdmitCardComponent,
    // StudentViewCouncellingComponent,
   //  RemarkDialogComponent,
    // ConfirmDialogComponent,
@@ -41,20 +51,24 @@ import { VerifySignatureComponent } from './verify-signature/verify-signature.co
     //StudentViewComponent,
    // CustomGridComponent,
     
-    // MenueComponent,
-    // LoginPageComponent,
-     //ProgressSpinnerComponent,
-    // StudentInfoComponent,
+   //  MenueComponent,
+   //  LoginPageComponent,
+     ProgressSpinnerComponent,
+     StudentInfoComponent,
     // EntityProgramSelectorComponent,
     // MarksGridComponent
   ],
   imports: [
    BrowserModule,
+   FormsModule,              // <-- Added
+    HttpClientModule,         // <-- Added
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
     NgIdleKeepaliveModule.forRoot(),
     MomentModule,
+    ZXingScannerModule
+   // NgxBarcodeScannerModule
    // CountdownModule
     //TableModule
   ],

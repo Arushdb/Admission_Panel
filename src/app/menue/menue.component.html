@@ -16,6 +16,16 @@
     >
       For GD Board
     </button>
+
+    <!-- ✅ Button for QR Code Board -->
+<button
+  class="navbar-brand"
+  mat-button
+  [matMenuTriggerFor]="qrMenu"
+  [style.display]="qrVerifyBoard ? 'block' : 'none'"
+>
+  For QR  VERIFICATION
+</button>
     <button
       class="navbar-brand"
       mat-button
@@ -100,6 +110,10 @@
       <button mat-menu-item (click)="enterGDMarks()">Enter GD Marks</button>
     </mat-menu>
 
+   <mat-menu #qrMenu="matMenu">
+  <button mat-menu-item (click)="verifyQrCode()">QR Code Verification</button>
+</mat-menu>
+
     <mat-menu #mainOption1="matMenu">
       <button mat-menu-item (click)="verifyMarks()">Verify Marks</button>
       <button mat-menu-item (click)="enterCCAMarks()">Enter CCA Marks</button>
@@ -122,18 +136,23 @@
     </mat-menu>
 
     <mat-menu #mainOption3="matMenu">
-      <button mat-menu-item (click)="generate_admit_card()">
+      <!--<button mat-menu-item (click)="generate_admit_card()">
         ADMIT-CARD GENERATE
-      </button>
+      </button> -->
       <button mat-menu-item (click)="entreanceTestRelated()">
         UploadEntranceTest
       </button>
+       <button mat-menu-item (click)="generateAdmitCard()">
+        GENERATE ADMIT-CARD NEW
+      </button>
+
       <button mat-menu-item [matMenuTriggerFor]="mainOption3A">
         COMPUTATION
       </button>
       <button mat-menu-item [matMenuTriggerFor]="mainOption3B">
         FINAL MERIT LIST
       </button>
+      
     </mat-menu>
 
     <mat-menu #mainOption3A="matMenu">
@@ -157,7 +176,7 @@
     </mat-menu>
 
     <mat-menu #mainOption4A="matMenu">
-      <button mat-menu-item (click)="generate_admit_card()">
+      <button mat-menu-item (click)="ADMIT-CARD()">
         GENERATE ADMIT CARD
       </button>
       <button mat-menu-item (click)="viewMarks()">VIEW MARKS STATUS</button>

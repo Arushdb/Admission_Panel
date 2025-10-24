@@ -18,6 +18,7 @@ export class MenueComponent implements OnInit {
   ONENT: boolean = false;
   gdBoard: boolean = false;
   deanUsr: boolean = false;
+  qrVerifyBoard: boolean = false; //Added by pragya
   user = "user@gmail.com";
   //instLogin:boolean;
   constructor(private router: ActivatedRoute, private router1: Router) {}
@@ -32,7 +33,17 @@ export class MenueComponent implements OnInit {
       this.SuperADMIN = false;
       this.clerkA = false;
       this.clerkB = false;
-    } else if (sessionStorage.getItem("Autho") == "INT01") {
+    } else if (sessionStorage.getItem("Autho") == "QRV01") { //Added by Pragya on 15oct2025
+      this.ccaBoard = false;
+      this.intBoard = false;
+      this.ADMIN = false;
+      this.SuperADMIN = false;
+      this.clerkA = false;
+      this.clerkB = false;
+      this.TT = false;
+      this.qrVerifyBoard = true;
+    } 
+    else if (sessionStorage.getItem("Autho") == "INT01") {
       this.ccaBoard = false;
       this.intBoard = true;
       this.ADMIN = false;
@@ -65,6 +76,7 @@ export class MenueComponent implements OnInit {
       this.clerkA = true;
       this.clerkB = true;
       this.gdBoard = true;
+      this.qrVerifyBoard = true;
       //this.TT=true;
     } else if (sessionStorage.getItem("Autho") == "TYP-B") {
       this.ccaBoard = false;
@@ -85,7 +97,11 @@ export class MenueComponent implements OnInit {
     } else if (sessionStorage.getItem("Autho") == "DEAN") {
       //added by Jyoti for DEAN Users
       this.deanUsr = true;
-    }
+    } 
+ //   else if (sessionStorage.getItem("Autho") == "QRCD") {
+   //   this.qrcodeBoard = true;
+      
+  //  }
 
     // this.clerkC=true;
     //console.log("menuLoad");
@@ -97,9 +113,11 @@ export class MenueComponent implements OnInit {
     this.router1.navigate(["/login"]);
   }
 
-  generate_admit_card() {
-    this.router1.navigate(["/genAdmitCard"]);
+
+verifyQrCode() {
+   this.router1.navigate(["/qr-verify"]);
   }
+
   enterInterviewMarks() {
     this.router1.navigate(["/interview"]);
   }
@@ -162,5 +180,9 @@ export class MenueComponent implements OnInit {
   }
   verifySignature() {
     this.router1.navigate(["/verifySignature"]);
+  }
+
+  generateAdmitCard() {
+    this.router1.navigate(["/superAdmin/generateAdmitCard"]); //added by Pragya on  03 Sep 2025
   }
 }

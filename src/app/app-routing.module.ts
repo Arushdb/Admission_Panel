@@ -2,9 +2,13 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { MenueComponent } from "./menue/menue.component";
 import { VerifySignatureComponent } from "./verify-signature/verify-signature.component";
+import { QrVerifierComponent } from "./qr-verifier/qr-verifier.component"; 
 
 const routes: Routes = [
+ // { path: "", redirectTo: "qr-verify", pathMatch: "full" }, // default route
   { path: "verifySignature", component: VerifySignatureComponent },
+  // ✅ New route for QR Verification
+  { path: "qr-verify", component: QrVerifierComponent },
   {
     path: "interview",
     loadChildren: () =>
@@ -70,6 +74,9 @@ const routes: Routes = [
     loadChildren: () =>
       import("./gd-marks/gd-marks.module").then((m) => m.GdMarksModule),
   },
+
+   // Wildcard route
+  //{ path: "**", redirectTo: "qr-verify" },
 ];
 
 @NgModule({

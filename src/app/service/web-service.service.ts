@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpParams, HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -15,8 +16,8 @@ export class WebServiceService {
   //urlName="http://125.17.153.215:8089/";
   // urlName="http://10.154.0.112:8089/";
   //urlName = "https://admission.dei.ac.in:8088/";
-  urlName = "https://admission.dei.ac.in/admission_panel_server"; 
-  //urlName = "http://localhost:8080/Admission_Panel"; // commented by Jyoti on 17 Jun 2025 
+ // urlName = "https://admission.dei.ac.in/admission_panel_server"; 
+  urlName = "http://localhost:8080/Admission_Panel"; // commented by Jyoti on 17 Jun 2025 
 
   private url = this.urlName + "/login/checkLogin.htm";
   private url1 = this.urlName + "/login/barCode.htm";
@@ -64,7 +65,23 @@ export class WebServiceService {
   private urlchkListStatus = this.urlName + "/verifymarks/chkListStatus.htm"; //added by Jyoti on 19 Jun 2025
   private urlupdatePrglistVfyStatus =
     this.urlName + "/verifymarks/setPrglistVfyStatus.htm"; //added by Jyoti on 19 Jun 2025
-  private urlgetSignature = this.urlName + "/verifymarks/getSignature.htm"; //added by Jyoti on 19 Jun 2025
+  private urlgetSignature = this.urlName + "/verifymarks/getSignature.htm";
+   //added by Jyoti on 19 Jun 2025
+
+   
+   private generateAdmitCardUrl =
+    this.urlName + "/generateAdmitCard/generateAdmitCard.htm";
+  private getProgramListUrl =
+    this.urlName + "/generateAdmitCard/getProgramList.htm"; // added by Pragya on 08 sep 2025
+
+   
+
+// ---------------- QR Verifier endpoints ----------------
+// QR Verifier endpoints
+  private scanQrUrl = this.urlName + "/qrVerify/scanQr.htm";
+  private markVerifiedUrl = this.urlName + "/qrVerify/markQrVerification.htm";
+  private getProgramListUrlQr = this.urlName + "/qrVerify/getProgramList.htm";
+   
 
   constructor(private http: HttpClient) {}
 
@@ -813,4 +830,74 @@ export class WebServiceService {
     });
     //return this.http.post(this.urlgetSignature, para, this.httpOption);
   }
+
+    
+
+getProgramList(): Observable<any> {
+  return this.http.get(this.getProgramListUrl, this.httpOption);
 }
+
+
+
+generateAdmitCardNew(programId: string): Observable<any> {
+  const payload = { programId: programId };   // backend expects {"programId": "..."}
+  return this.http.post(this.generateAdmitCardUrl, payload, this.httpOption);
+}
+
+ // ================= QR Verifier Methods =================
+
+  /**
+   * Fetch list of programs for QR verification
+   */
+  getPrograms(): Observable<any> {
+    return this.http.get(this.getProgramListUrlQr, this.httpOption);
+  }
+
+  /**
+   * Scan QR Code and log it in the backend
+   * @param qrText QR code value (applicationNumber)
+   * @param scannedBy logged-in user
+   */
+  scanQr(qrText: string, scannedBy: string): Observable<any> {
+    const payload = {
+      applicationNumber: qrText,
+      programId: '', // optional if you want to pass programId
+      verifiedBy: scannedBy,
+    };
+    return this.http.post(this.scanQrUrl, payload, this.httpOption);
+  }
+
+  /**
+   * Mark QR verification as verified/unverified
+   * @param id log ID
+   * @param verified 'Y' or 'N'
+   * @param verifiedBy user
+   * @param remarks optional remarks
+   */
+  markVerification(id: number, verified: 'Y' | 'N', verifiedBy: string, remarks = ''): Observable<any> {
+    const payload = {
+      id,
+      verificationStatus: verified === 'Y' ? 'VERIFIED' : 'REJECTED',
+      verifiedBy,
+      remarks,
+    };
+    return this.http.post(this.markVerifiedUrl, payload, this.httpOption);
+  }
+
+  getStudentInfo(applicationNumber: string) {
+  let param = JSON.stringify({
+    employee_code: sessionStorage.getItem("EmployeeCode"),
+    panel_authority: sessionStorage.getItem("Autho"),
+    flag: sessionStorage.getItem("flag"),
+    application_number: applicationNumber,
+  });
+  let para = new HttpParams({ fromObject: { courseObject: param } });
+
+  return this.http.post(this.getstudent, para, this.httpOption);
+}
+
+}
+ 
+
+
+
