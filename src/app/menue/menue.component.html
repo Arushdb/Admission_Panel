@@ -122,18 +122,23 @@
     </mat-menu>
 
     <mat-menu #mainOption3="matMenu">
-      <button mat-menu-item (click)="generate_admit_card()">
+      <!--<button mat-menu-item (click)="generate_admit_card()">
         ADMIT-CARD GENERATE
-      </button>
+      </button> -->
       <button mat-menu-item (click)="entreanceTestRelated()">
         UploadEntranceTest
       </button>
+       <button mat-menu-item (click)="generateAdmitCard()">
+        GENERATE ADMIT-CARD NEW
+      </button>
+
       <button mat-menu-item [matMenuTriggerFor]="mainOption3A">
         COMPUTATION
       </button>
       <button mat-menu-item [matMenuTriggerFor]="mainOption3B">
         FINAL MERIT LIST
       </button>
+      
     </mat-menu>
 
     <mat-menu #mainOption3A="matMenu">
@@ -157,7 +162,7 @@
     </mat-menu>
 
     <mat-menu #mainOption4A="matMenu">
-      <button mat-menu-item (click)="generate_admit_card()">
+      <button mat-menu-item (click)="ADMIT-CARD()">
         GENERATE ADMIT CARD
       </button>
       <button mat-menu-item (click)="viewMarks()">VIEW MARKS STATUS</button>

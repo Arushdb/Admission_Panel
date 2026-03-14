@@ -1,0 +1,50 @@
+<app-menue></app-menue>
+
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header text-white bg-success mb-3">
+      Generate Admit Cards
+    </div>
+
+    <!-- Program Selector -->
+    <div class="form-group col-md-4">
+      <label for="program">Select Program:</label>
+      <select [(ngModel)]="selectedProgramId" id="program" class="form-control">
+        <option value="">-- Select --</option>
+        <option *ngFor="let prog of programList" [value]="prog.programId">
+          {{ prog.programName }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Spinner -->
+  <!--  <div #spinnerDiv class="form-group col-md-3" *ngIf="programList.length === 0">
+      <progress-spinner></progress-spinner>
+    </div> -->
+ <!-- Spinner -->
+    <div class="form-group col-md-3 text-center" *ngIf="loading">
+  <progress-spinner></progress-spinner>
+</div>
+
+    <!-- Action Buttons -->
+    <div class="container mt-2">
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <button type="button" class="btn btn-success" (click)="generateAdmitCards()">
+            Generate Admit Cards
+          </button>
+        </div>
+        <div class="form-group col-md-3">
+          <button type="button" class="btn btn-primary" (click)="loadPrograms()">
+            Reload Programs
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message / Status -->
+    <div class="form-group col-md-8 mt-3" *ngIf="message">
+      <div class="alert alert-info">{{ message }}</div>
+    </div>
+  </div>
+</div>

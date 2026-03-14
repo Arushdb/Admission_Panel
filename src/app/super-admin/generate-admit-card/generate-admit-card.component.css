@@ -1,0 +1,16 @@
+.generate-admit-card-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+select, button {
+  margin: 10px 0;
+  padding: 6px;
+}
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+  color: green;
+}
