@@ -16,9 +16,10 @@ export class WebServiceService {
   //urlName="http://125.17.153.215:8089/";
   // urlName="http://10.154.0.112:8089/";
   //urlName = "https://admission.dei.ac.in:8088/";
-  urlName = "https://admission.dei.ac.in/admission_panel_server"; 
- // urlName = "http://localhost:8080/Admission_Panel"; // commented by Jyoti on 17 Jun 2025 
-
+  //urlName = "https://admission.dei.ac.in/admission_panel_server"; 
+  
+  urlName = "http://localhost:8080/Admission_Panel"; // commented by Jyoti on 17 Jun 2025 
+ // urlName = "http://localhost:8080/admissionform"; // added by Jyoti on 17 Jun 2025 for local testing
   private url = this.urlName + "/login/checkLogin.htm";
   private url1 = this.urlName + "/login/barCode.htm";
   private getFacultyUrl = this.urlName + "/login/loadEntity.htm";
@@ -73,6 +74,13 @@ export class WebServiceService {
     this.urlName + "/generateAdmitCard/generateAdmitCard.htm";
   private getProgramListUrl =
     this.urlName + "/generateAdmitCard/getProgramList.htm"; // added by Pragya on 08 sep 2025
+private urlapplicantprograms =
+    this.urlName + "/verifymarks/getApplicantPrograms.htm";
+    private urluserprograms =
+    this.urlName + "/verifymarks/getUserPrograms.htm";
+    private urlvalidateInterview =
+    this.urlName + "/verifymarks/validateInterview.htm";
+
 
      // ---------------- QR Verifier endpoints ----------------
  //private scanQrUrl = this.urlName + "/qr/scanQr.htm";
@@ -399,7 +407,7 @@ export class WebServiceService {
     return this.http.post(this.getstudentView, para, this.httpOption);
   }
 
-  insertMarks(val, app) {
+  insertMarks(val, app, programId?: string | null) {
     let param = JSON.stringify({
       employee_code: sessionStorage.getItem("EmployeeCode"),
       panel_authority: sessionStorage.getItem("Autho"),
@@ -407,7 +415,9 @@ export class WebServiceService {
       marks: val,
       application_number: app,
       creator: sessionStorage.getItem("userId"),
+      program_id: programId,
     });
+    console.log(param);
     let para = new HttpParams({ fromObject: { courseObject: param } });
 
     return this.http.post(this.DoOPeration, para, this.httpOption);
@@ -755,7 +765,7 @@ export class WebServiceService {
     return this.http.post(this.url_updatestatus, para, this.httpOption);
   }
 
-  validatefromIWlist(appno: string) {
+  validatefromIWlist(appno: string, programId?: string) {
     let user = sessionStorage.getItem("userId");
     let menu = sessionStorage.getItem("flag");
 
@@ -763,6 +773,9 @@ export class WebServiceService {
     para = para.set("application_number", appno);
     para = para.set("user", user);
     para = para.set("menu", menu);
+    if (programId) {
+      para = para.set("program_id", programId);
+    }
     debugger;
 
     return this.http.post(this.url_validateIWlist, para, this.httpOption);
@@ -840,7 +853,40 @@ generateAdmitCardNew(programId: string): Observable<any> {
   return this.http.post(this.generateAdmitCardUrl, payload, this.httpOption);
 }
 
+getApplicantPrograms(applicationNumber: string): Observable<any> {
+  const payload = { application_number: applicationNumber }; 
+  let para = new HttpParams();
+    para = para.set("application_number", applicationNumber);
+
+  return this.http.post(this.urlapplicantprograms, para, this.httpOption);
+
+}
+
+getUserPrograms(): Observable<any> {
+  const userId = sessionStorage.getItem("userId");
+
+  let para = new HttpParams();
+    para = para.set("userId", userId);
+  return this.http.post(this.urluserprograms, para, this.httpOption);
+}
+
+validateInterview(programid:string,appno:string,comp:string): Observable<any> {
+
+
+  let para = new HttpParams();
+    para = para.set("programid", programid);
+    para = para.set("appno", appno);
+    para = para.set("comp", comp);
+
+  return this.http.post(this.urlvalidateInterview, para, this.httpOption);
+}
  
 }
+
+
+
+
+
+ 
 
 

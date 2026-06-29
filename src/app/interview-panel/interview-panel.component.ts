@@ -18,6 +18,7 @@ export class InterviewPanelComponent implements OnInit {
   fileData: File = null;
   previewUrl:any = null;
   imageToShow:any;
+  marks: number | null = null;
   myURL:any;
    imageUrl = '/Admission_Panel/assets/img/';
   // imageUrl = '/assets/img/';
@@ -28,11 +29,24 @@ export class InterviewPanelComponent implements OnInit {
   @ViewChild('marksVal', {static: false}) marksVal: ElementRef;
   @ViewChild('but1', {static: false}) but1: ElementRef;
   @ViewChild('spinnerDiv', {static: false}) spinnerDiv: ElementRef;
+  @ViewChild('appNo', { static: false })
+appNoInput!: ElementRef;
+
+
+  selectedprogram: string | null="";
+  myAppno: any;
   constructor(private myservice:WebServiceService,private dialog: MatDialog) { }
    inputValue="hello i am parent";
    Appno="";
    AppnoImage="";
-  
+   applicationNumber: string = '';    
+  programList:any;  
+
+selectedProgramId: string =""; // Variable to hold the selected program ID
+
+onProgramChange() {
+  console.log('Selected Program:', this.selectedProgramId);
+}
 
    ngAfterViewInit()
   {
@@ -43,13 +57,88 @@ export class InterviewPanelComponent implements OnInit {
   
   ngOnInit() {
    sessionStorage.setItem('flag','PW');
+   this.getuserProgramList();
+   
+
  
   }
+onApplicationNumberChange(value: string): void {
 
+ // this.programList = []; 
+  this.myAppno = "";
+ 
+  if (value && value.length >= 6) {
+    // Clear the program list when the application number changes
+     this.myAppno=value;
+     this.validateInterview(this.selectedProgramId);
+   // this.getApplicantPrograms(value);
+  }
+}
 
+getuserProgramList() {
+
+  this.myservice.getUserPrograms().subscribe(
+    res => {  
+      console.log('User Program List:', res);
+      this.programList = res; // Assign the response to the programList variable
+      // Handle the response as needed
+    },
+    err => {  
+      console.error('Error fetching user program list:', err);
+    }
+  );
+}
+getApplicantPrograms(applicationNumber: string) {
+ 
+   this.myservice.getApplicantPrograms(applicationNumber).subscribe(
+    res => {
+      console.log('Applicant Programs:', res);
+      this.programList = res; // Assign the response to the programList variable
+      // Handle the response as needed
+    },
+    err => {
+      console.error('Error fetching applicant programs:', err);
+    }
+  );
+}
+
+validateInterview(programId: string): void {
+  // Call your API
+    this.spinnerDiv.nativeElement.hidden=false;
+  console.log('Validating Program:', programId);
+this.myservice.validateInterview( programId,this.myAppno,"PW").subscribe(
+  res => {
+    console.log('Validation Response:', res); 
+    if(!res[0].status)
+    {
+       this.marksVal.nativeElement.disabled=true;
+     this.but1.nativeElement.disabled=true;
+    this.spinnerDiv.nativeElement.hidden=true;
+      alert(res[0].message);
+    }else{
+      this.marksVal.nativeElement.disabled=false;
+     this.but1.nativeElement.disabled=false;
+    this.spinnerDiv.nativeElement.hidden=true;
+    this.marks=null;
+    }
+  },
+  err => {
+    console.error('Error validating program:', err);
+    this.spinnerDiv.nativeElement.hidden=true;
+  }
+); 
+  // Example
+  // this.admissionService.validationProgram(programId)
+  //   .subscribe(response => {
+  //      console.log(response);
+  //   });
+}
 
   getData(value)
   {
+    this.myAppno=value[0].application_number;
+    this.getApplicantPrograms(this.myAppno);
+    console.log("Application Number: " + this.myAppno);
     if(value[0].first_name!="")
     {
       if(value[0].marks_status=="P")
@@ -73,17 +162,30 @@ export class InterviewPanelComponent implements OnInit {
    
   }
 
-  EnterMarks(val)
+  EnterMarks()
   {
+console.log("entered Marks " + this.marks);
+    console.log("Selected Program ID:", this.selectedProgramId);
+    if(this.selectedProgramId==null || this.selectedProgramId=="")
+    {
+      alert("Please select program first");
+      return;
+    }
 
-    this.myservice.validatefromIWlist(this.Appno).subscribe(
+    this.myservice.validatefromIWlist(this.myAppno,this.selectedProgramId).subscribe(
       res=>{
 
         console.log(res[0].count);
-        if(res[0].count!==0)
-        this.enterIWmarks(val);
-        else{
+        if(res[0].count!==0){
+this.enterIWmarks(this.marks,this.selectedProgramId);
+       this.marksVal.nativeElement.disabled=false;
+     this.but1.nativeElement.disabled=false;
+    this.spinnerDiv.nativeElement.hidden=true;
+        }
+        
+        else {
           alert("You are not authorized for this Application Number");
+          
          this.Appno="";
          return;
 
@@ -154,15 +256,16 @@ getBase64Image(img: HTMLImageElement) {
 
 
 
-enterIWmarks(val){
+enterIWmarks(val: number | null, programId?: string | null){
 
   var marks = new String(val) ;
+  console.log("Marks entered: " + marks);
   if(+marks<=8)
   {
     this.spinnerDiv.nativeElement.hidden=false;
     //console.log(val);
   
-    this.myservice.insertMarks(val,this.Appno).subscribe
+    this.myservice.insertMarks(val,this.myAppno,programId).subscribe
     (
       responce =>
         {
@@ -171,22 +274,30 @@ enterIWmarks(val){
            {
 
             this.spinnerDiv.nativeElement.hidden=true;
-             this.stuComp.focusMehtod();
-             this.stuComp.ClearData();
+             //this.stuComp.focusMehtod();
+             //this.stuComp.ClearData();
              this.marksVal.nativeElement.value=null;
              this.marksVal.nativeElement.disabled=true;
              this.but1.nativeElement.disabled=true;
+             this.applicationNumber = '';
+             this.marks = null;
+             alert(" Interview marks entered successfully");
+
+
            }
            else 
            {
            this.spinnerDiv.nativeElement.hidden=true;
             alert("Error Occured please contact to Administrator!");
-            this.stuComp.focusMehtod();
-            this.stuComp.ClearData();
+           // this.stuComp.focusMehtod();
+            //this.stuComp.ClearData();
             this.marksVal.nativeElement.value=null;
             this.marksVal.nativeElement.disabled=true;
             this.but1.nativeElement.disabled=true;
            }
+            setTimeout(() => {
+            this.appNoInput.nativeElement.focus();
+          });
           
         }
     );
