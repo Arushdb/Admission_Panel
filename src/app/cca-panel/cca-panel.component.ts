@@ -15,16 +15,24 @@ import { ViewCertificateComponent } from './view-certificate/view-certificate.co
 export class CcaPanelComponent implements OnInit {
 
   studentInfo:studentBean[];
+  marks: number | null = null;
 
   @ViewChild(StudentInfoComponent,{static: false}) stuComp:StudentInfoComponent;
   @ViewChild(ProgressSpinnerComponent,{static: false}) progSpin:ProgressSpinnerComponent;
   @ViewChild('marksVal', {static: false}) marksVal: ElementRef;
   @ViewChild('but1', {static: false}) but1: ElementRef;
   @ViewChild('spinnerDiv', {static: false}) spinnerDiv: ElementRef;
+  @ViewChild('appNo', { static: false })
+appNoInput!: ElementRef;
+  selectedprogram: string | null="";
+  myAppno: any;
+  selectedProgramId: string ="";
   constructor(private myservice:WebServiceService,private dialog: MatDialog) { }
    inputValue="hello i am parent";
    Appno="";
    AppnoImage="";
+    applicationNumber: string = '';    
+  programList:any; 
      //imageUrl = '/Admission_Panel/assets/img/';
     //  imageUrl = '/assets/CCA/';
     //  base64Image: any;
@@ -39,46 +47,119 @@ export class CcaPanelComponent implements OnInit {
   
   ngOnInit() {
    sessionStorage.setItem('flag','CA');
+   this.getuserProgramList();
  
   }
+onApplicationNumberChange(value: string): void {
 
-
-
-  getData(value)
-  {
-     const autho = sessionStorage.getItem("Autho");
-    if(value[0].first_name!="")
-    {
-      const status = value[0].marks_status;
-    this.AppnoImage = value[0].application_number;
-      if(value[0].marks_status=="P"  && autho !== "ADM11")
-      {
-        this.marksVal.nativeElement.disabled=true;
-        this.but1.nativeElement.disabled=true;
-        this.AppnoImage=value[0].application_number;
-      }
-     // else if (value[0].marks_status=="A")
-     else
-      {
-        this.Appno=value[0].application_number;
-        this.marksVal.nativeElement.disabled=false;
-        this.AppnoImage=value[0].application_number;
-        this.but1.nativeElement.disabled=false;
-        this.marksVal.nativeElement.focus();
-        
-      }
-     
-    }
-   
+ // this.programList = []; 
+  this.myAppno = "";
+ 
+  if (value && value.length >= 6) {
+    // Clear the program list when the application number changes
+     this.myAppno=value;
+     this.validateInterview(this.selectedProgramId);
+   // this.getApplicantPrograms(value);
   }
+}
+
+getuserProgramList() {
+
+  this.myservice.getUserPrograms().subscribe(
+    res => {  
+      console.log('User Program List:', res);
+      this.programList = res; // Assign the response to the programList variable
+      // Handle the response as needed
+    },
+    err => {  
+      console.error('Error fetching user program list:', err);
+    }
+  );
+}
+getApplicantPrograms(applicationNumber: string) {
+ 
+   this.myservice.getApplicantPrograms(applicationNumber).subscribe(
+    res => {
+      console.log('Applicant Programs:', res);
+      this.programList = res; // Assign the response to the programList variable
+      // Handle the response as needed
+    },
+    err => {
+      console.error('Error fetching applicant programs:', err);
+    }
+  );
+}
+
+validateInterview(programId: string): void {
+  // Call your API
+    this.spinnerDiv.nativeElement.hidden=false;
+  console.log('Arush Validating Program:', programId);
+  debugger;
+this.myservice.validateInterview( programId,this.myAppno,"CA").subscribe(
+  res => {
+    console.log('Validation Response:', res); 
+    if(!res[0].status)
+    {
+       this.marksVal.nativeElement.disabled=true;
+     this.but1.nativeElement.disabled=true;
+    this.spinnerDiv.nativeElement.hidden=true;
+      alert(res[0].message);
+    }else{
+      this.marksVal.nativeElement.disabled=false;
+     this.but1.nativeElement.disabled=false;
+    this.spinnerDiv.nativeElement.hidden=true;
+    this.marks=null;
+    }
+  },
+  err => {
+    console.error('Error validating program:', err);
+    this.spinnerDiv.nativeElement.hidden=true;
+  }
+); 
+  // Example
+  // this.admissionService.validationProgram(programId)
+  //   .subscribe(response => {
+  //      console.log(response);
+  //   });
+}
+
+
+
+  // getData(value)
+  // {
+  //    const autho = sessionStorage.getItem("Autho");
+  //   if(value[0].first_name!="")
+  //   {
+  //     const status = value[0].marks_status;
+  //   this.AppnoImage = value[0].application_number;
+  //     if(value[0].marks_status=="P"  && autho !== "ADM11")
+  //     {
+  //       this.marksVal.nativeElement.disabled=true;
+  //       this.but1.nativeElement.disabled=true;
+  //       this.AppnoImage=value[0].application_number;
+  //     }
+  //    // else if (value[0].marks_status=="A")
+  //    else
+  //     {
+  //       this.Appno=value[0].application_number;
+  //       this.marksVal.nativeElement.disabled=false;
+  //       this.AppnoImage=value[0].application_number;
+  //       this.but1.nativeElement.disabled=false;
+  //       this.marksVal.nativeElement.focus();
+        
+  //     }
+     
+  //   }
+   
+  // }
 
   validateIWlist(val){
-    this.myservice.validatefromIWlist(this.Appno).subscribe(
+    this.myservice.validatefromIWlist(this.myAppno).subscribe(
       res=>{
 
         console.log(res[0].count);
         if(res[0].count!==0)
-        this.EnterMarks(val);
+        this.EnterMarks();
          else{
           alert("You are not authorized for this Application Number");
          this.Appno="";
@@ -92,15 +173,24 @@ export class CcaPanelComponent implements OnInit {
       });
   }
 
-  EnterMarks(val)
+  EnterMarks()
   {
-    var marks = new String(val) ;
+    console.log("entered Marks " + this.marks);
+    console.log("Selected Program ID:", this.selectedProgramId);
+    if(this.selectedProgramId==null || this.selectedProgramId=="")
+    {
+      alert("Please select program first");
+      return;
+    }
+    var marks = new String(this.marks); ;
     if(+marks<=12)
     {
       this.spinnerDiv.nativeElement.hidden=false;
       //console.log(val); 
     
-      this.myservice.insertMarks(val,this.Appno).subscribe
+      this.myservice.insertMarks(this.marks,this.myAppno,this.selectedProgramId
+
+      ).subscribe
       (
         responce =>
           {
@@ -109,12 +199,17 @@ export class CcaPanelComponent implements OnInit {
              {
 
               this.spinnerDiv.nativeElement.hidden=true;
-               this.stuComp.focusMehtod();
-               this.stuComp.ClearData();
+              // this.stuComp.focusMehtod();
+               //this.stuComp.ClearData();
                this.marksVal.nativeElement.value=null;
                this.marksVal.nativeElement.disabled=true;
                this.but1.nativeElement.disabled=true;
-             }
+             this.applicationNumber = '';
+             this.marks = null;
+              alert(" CCA marks entered successfully");
+
+
+              }
              else if(this.studentInfo[0].update_status=="NORECORD")
              {
               this.spinnerDiv.nativeElement.hidden=true;
@@ -129,12 +224,15 @@ export class CcaPanelComponent implements OnInit {
              {
              this.spinnerDiv.nativeElement.hidden=true;
               alert("Error Occured please contact to Administrator!");
-              this.stuComp.focusMehtod();
-              this.stuComp.ClearData();
+              //this.stuComp.focusMehtod();
+              //this.stuComp.ClearData();
               this.marksVal.nativeElement.value=null;
               this.marksVal.nativeElement.disabled=true;
               this.but1.nativeElement.disabled=true;
              }
+              setTimeout(() => {
+            this.appNoInput.nativeElement.focus();
+          });
             
           }
       );
