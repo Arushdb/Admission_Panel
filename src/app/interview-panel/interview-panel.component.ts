@@ -40,7 +40,8 @@ appNoInput!: ElementRef;
    Appno="";
    AppnoImage="";
    applicationNumber: string = '';    
-  programList:any;  
+  programList:any; 
+  ComponentID:string="PW"; 
 
 selectedProgramId: string =""; // Variable to hold the selected program ID
 
@@ -77,7 +78,7 @@ onApplicationNumberChange(value: string): void {
 
 getuserProgramList() {
 
-  this.myservice.getUserPrograms().subscribe(
+  this.myservice.getUserPrograms(this.ComponentID).subscribe(
     res => {  
       console.log('User Program List:', res);
       this.programList = res; // Assign the response to the programList variable

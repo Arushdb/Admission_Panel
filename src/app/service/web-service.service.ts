@@ -862,11 +862,12 @@ getApplicantPrograms(applicationNumber: string): Observable<any> {
 
 }
 
-getUserPrograms(): Observable<any> {
+getUserPrograms(component:string ): Observable<any> {
   const userId = sessionStorage.getItem("userId");
 
   let para = new HttpParams();
     para = para.set("userId", userId);
+    para = para.set("component", component);
   return this.http.post(this.urluserprograms, para, this.httpOption);
 }
 
@@ -877,6 +878,8 @@ validateInterview(programid:string,appno:string,comp:string): Observable<any> {
     para = para.set("programid", programid);
     para = para.set("appno", appno);
     para = para.set("comp", comp);
+
+    console.log("validateInterview service called with params:", para.toString());
 
   return this.http.post(this.urlvalidateInterview, para, this.httpOption);
 }

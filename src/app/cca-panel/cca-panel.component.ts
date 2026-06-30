@@ -33,6 +33,7 @@ appNoInput!: ElementRef;
    AppnoImage="";
     applicationNumber: string = '';    
   programList:any; 
+  ComponentID:string="CA";
      //imageUrl = '/Admission_Panel/assets/img/';
     //  imageUrl = '/assets/CCA/';
     //  base64Image: any;
@@ -65,7 +66,7 @@ onApplicationNumberChange(value: string): void {
 
 getuserProgramList() {
 
-  this.myservice.getUserPrograms().subscribe(
+  this.myservice.getUserPrograms(this.ComponentID).subscribe(
     res => {  
       console.log('User Program List:', res);
       this.programList = res; // Assign the response to the programList variable
