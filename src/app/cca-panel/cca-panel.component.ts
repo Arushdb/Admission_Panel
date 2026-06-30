@@ -154,7 +154,7 @@ this.myservice.validateInterview( programId,this.myAppno,"CA").subscribe(
    
   // }
 
-  validateIWlist(val){
+  validateIWlist(){
     this.myservice.validatefromIWlist(this.myAppno).subscribe(
       res=>{
 
