@@ -81,6 +81,8 @@ private urlapplicantprograms =
     private urlvalidateInterview =
     this.urlName + "/verifymarks/validateInterview.htm";
 
+    private urlenteredcandidates = this.urlName + "/verifymarks/getEnteredCandidates.htm"; // added by Arush on
+
 
      // ---------------- QR Verifier endpoints ----------------
  //private scanQrUrl = this.urlName + "/qr/scanQr.htm";
@@ -882,6 +884,17 @@ validateInterview(programid:string,appno:string,comp:string): Observable<any> {
     console.log("validateInterview service called with params:", para.toString());
 
   return this.http.post(this.urlvalidateInterview, para, this.httpOption);
+}
+
+getEnteredCandidates(programId: string, component: string): Observable<any> {
+   const userId = sessionStorage.getItem("userId");
+  let para = new HttpParams();
+
+  para = para.set("programId", programId);
+  para = para.set("component", component);
+  para = para.set("userId", userId);
+  console.log("getEnteredCandidates service called with params:", para.toString());
+  return this.http.post(this.urlenteredcandidates, para, this.httpOption);
 }
  
 }

@@ -27,6 +27,8 @@ appNoInput!: ElementRef;
   selectedprogram: string | null="";
   myAppno: any;
   selectedProgramId: string ="";
+   applicantName: any="";
+  candidates: any[];
   constructor(private myservice:WebServiceService,private dialog: MatDialog) { }
    inputValue="hello i am parent";
    Appno="";
@@ -34,6 +36,7 @@ appNoInput!: ElementRef;
     applicationNumber: string = '';    
   programList:any; 
   ComponentID:string="CA";
+   showCandidateList = false;
      //imageUrl = '/Admission_Panel/assets/img/';
     //  imageUrl = '/assets/CCA/';
     //  base64Image: any;
@@ -106,6 +109,7 @@ this.myservice.validateInterview( programId,this.myAppno,"CA").subscribe(
     this.spinnerDiv.nativeElement.hidden=true;
       alert(res[0].message);
     }else{
+      this.applicantName=res[0].firstname;
       this.marksVal.nativeElement.disabled=false;
      this.but1.nativeElement.disabled=false;
     this.spinnerDiv.nativeElement.hidden=true;
@@ -154,6 +158,11 @@ this.myservice.validateInterview( programId,this.myAppno,"CA").subscribe(
    
   // }
 
+ 
+
+toggleCandidateList() {
+  this.showCandidateList = !this.showCandidateList;
+}
   validateIWlist(){
     this.myservice.validatefromIWlist(this.myAppno).subscribe(
       res=>{
@@ -206,6 +215,7 @@ this.myservice.validateInterview( programId,this.myAppno,"CA").subscribe(
                this.marksVal.nativeElement.disabled=true;
                this.but1.nativeElement.disabled=true;
              this.applicationNumber = '';
+             this.applicantName = '';
              this.marks = null;
               alert(" CCA marks entered successfully");
 
@@ -243,6 +253,20 @@ this.myservice.validateInterview( programId,this.myAppno,"CA").subscribe(
       
       alert(" CCA marks must be equal or less than 12");
     }
+  }
+
+  viewCandidates()
+  {
+    this.showCandidateList = !this.showCandidateList;
+    this.myservice.getEnteredCandidates(this.selectedProgramId, this.ComponentID).subscribe(
+      (candidates: any[]) => {
+        this.candidates = candidates;
+        console.log('Entered Candidates:', this.candidates);
+      },
+      (error: any) => {
+        console.error('Error fetching entered candidates:', error);
+      }
+    );
   }
 
 

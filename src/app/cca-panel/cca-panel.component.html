@@ -1,20 +1,14 @@
 <app-menue></app-menue>
-<br>
+<br />
 
 <div class="container">
+  <div class="card">
+    <div class="card-header text-white bg-success mb-3">Enter CCA Marks</div>
 
-    <div class="card" >
-
-        <div class="card-header text-white bg-success mb-3" >
-            Enter CCA Marks
-           </div>
-
-           <mat-form-field appearance="outline" style="width: 100%">
+    <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>Select Program</mat-label>
 
-      <mat-select [(ngModel)]="selectedProgramId" 
-      name="programId"
-      >
+      <mat-select [(ngModel)]="selectedProgramId" name="programId">
         <mat-option
           *ngFor="let program of programList"
           [value]="program.programId"
@@ -24,72 +18,102 @@
       </mat-select>
     </mat-form-field>
     <p>Selected Program ID: {{ selectedProgramId }}</p>
-    <mat-form-field appearance="outline" style="width: 300px;">
-  <mat-label>Application Number</mat-label>
+    <mat-form-field appearance="outline" style="width: 300px">
+      <mat-label>Application Number</mat-label>
 
-  <input
-    matInput
-    type="text"
-    name="applicationNumber"
-    [(ngModel)]="applicationNumber"
-    #appNo
-      required
-      minlength="6"
-      (ngModelChange)="onApplicationNumberChange($event)"
-      placeholder="Enter Application Number">
- <mat-error *ngIf="appNo.errors?.required && appNo.touched">
-    Application Number is required.
-  </mat-error>
+      <input
+        matInput
+        type="text"
+        name="applicationNumber"
+        [(ngModel)]="applicationNumber"
+        #appNo
+        required
+        minlength="6"
+        (ngModelChange)="onApplicationNumberChange($event)"
+        placeholder="Enter Application Number"
+      />
+      <mat-error *ngIf="appNo.errors?.required && appNo.touched">
+        Application Number is required.
+      </mat-error>
 
-  <mat-error *ngIf="appNo.errors?.minlength && appNo.touched">
-    Application Number must be at least 6 characters long.
-  </mat-error>
- 
-</mat-form-field>
- <div #spinnerDiv>
+      <mat-error *ngIf="appNo.errors?.minlength && appNo.touched">
+        Application Number must be at least 6 characters long.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-50">
+      <mat-label>Applicant Name</mat-label>
+      <input matInput class="bold-text" [value]="applicantName" readonly />
+    </mat-form-field>
+    <div #spinnerDiv>
       <progress-spinner></progress-spinner>
     </div>
-       <!--    <student-info [myvariable]="inputValue" (myOutput)="getData($event)"></student-info>
+    <!--    <student-info [myvariable]="inputValue" (myOutput)="getData($event)"></student-info>
            <div #spinnerDiv>
            <progress-spinner></progress-spinner>
           </div>
           -->
-        <!--   <div class="container" style="background-color: #92a8d1">-->
-            <div class="container" >
-            <br>
-        <div class="form-row" >
+    <!--   <div class="container" style="background-color: #92a8d1">-->
+    <div class="container">
+      <br />
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label>CCA marks</label>
+        </div>
 
-            <div class="form-group col-md-3">
-                <label >CCA marks</label>
-            </div>
-           
-            
-
-             <div class="form-group col-md-4">
+        <div class="form-group col-md-4">
           <input
             type="number"
             #marksVal
-                      
             [(ngModel)]="marks"
             name="marks"
             class="form-control"
             placeholder="CCA marks"
             (keyup.enter)="EnterMarks()"
-           
           />
         </div>
 
-            <div class="form-group col-md-3">
-                <button  type="button" #but1 class="btn btn-success" (click)="validateIWlist()" >Enter Marks</button>
-            </div>
-    
+        <div class="form-group col-md-3">
+          <button
+            type="button"
+            #but1
+            class="btn btn-success"
+            (click)="validateIWlist()"
+          >
+            Enter Marks
+          </button>
         </div>
+        <button
+          *ngIf="selectedProgramId"
+          mat-raised-button
+          color="primary"
+          (click)="viewCandidates()"
+        >
+          <mat-icon>list</mat-icon>
+          View Entered Candidates
+        </button>
+      
+      </div>
+        <mat-card *ngIf="showCandidateList && candidates && candidates.length > 0">
+          <mat-card-title>Entered Candidates</mat-card-title>
+
+          <mat-list>
+            <mat-list-item *ngFor="let candidate of candidates; let i = index">
+              <strong>{{ i + 1 }}.</strong>
+              &nbsp;&nbsp;
+              <strong>{{ candidate.applicationNo }}</strong>
+              &nbsp; - &nbsp;
+              {{ candidate.applicantName }}
+              &nbsp;&nbsp;
+              <strong>Score:</strong> {{ candidate.score }}
+            </mat-list-item>
+          </mat-list>
+        </mat-card>
     </div>
-    </div>
+  </div>
 </div>
 
 <div class="container">
-<!--
+  <!--
     <div class="form-row" >
             <div class="form-group col-md-1">
             <button  type="button" class="btn btn-success" (click)="showImageNCC()" >Show NCC</button>
@@ -110,7 +134,7 @@
            
     </div>
 -->
-    <!--
+  <!--
    <div>
     <img [src]="base64Image" />
   </div>
@@ -121,4 +145,3 @@
     </div>
     -->
 </div>
-

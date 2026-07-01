@@ -49,6 +49,15 @@
  
 </mat-form-field>
 
+<mat-form-field appearance="outline" class="w-50">
+  <mat-label>Applicant Name</mat-label>
+  <input
+    matInput
+   class="bold-text"
+    [value]="applicantName"
+    readonly>
+</mat-form-field>
+
     
     <div #spinnerDiv>
       <progress-spinner></progress-spinner>
@@ -86,7 +95,31 @@
             Enter Marks
           </button>
         </div>
+          <button
+          *ngIf="selectedProgramId"
+          mat-raised-button
+          color="primary"
+          (click)="viewCandidates()"
+        >
+          <mat-icon>list</mat-icon>
+          View Entered Candidates
+        </button>
       </div>
+         <mat-card *ngIf="showCandidateList && candidates && candidates.length > 0">
+          <mat-card-title>Entered Candidates</mat-card-title>
+
+          <mat-list>
+            <mat-list-item *ngFor="let candidate of candidates; let i = index">
+              <strong>{{ i + 1 }}.</strong>
+              &nbsp;&nbsp;
+              <strong>{{ candidate.applicationNo }}</strong>
+              &nbsp; - &nbsp;
+              {{ candidate.applicantName }}
+              &nbsp;&nbsp;
+              <strong>Score:</strong> {{ candidate.score }}
+            </mat-list-item>
+          </mat-list>
+        </mat-card>
     </div>
   </div>
 </div>

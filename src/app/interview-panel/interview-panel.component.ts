@@ -35,6 +35,8 @@ appNoInput!: ElementRef;
 
   selectedprogram: string | null="";
   myAppno: any;
+  applicantName: any="";
+  candidates: any[];
   constructor(private myservice:WebServiceService,private dialog: MatDialog) { }
    inputValue="hello i am parent";
    Appno="";
@@ -42,6 +44,7 @@ appNoInput!: ElementRef;
    applicationNumber: string = '';    
   programList:any; 
   ComponentID:string="PW"; 
+  showCandidateList = false;
 
 selectedProgramId: string =""; // Variable to hold the selected program ID
 
@@ -117,6 +120,8 @@ this.myservice.validateInterview( programId,this.myAppno,"PW").subscribe(
     this.spinnerDiv.nativeElement.hidden=true;
       alert(res[0].message);
     }else{
+      console.log('Validation successful:', res);
+      this.applicantName=res[0].firstname;
       this.marksVal.nativeElement.disabled=false;
      this.but1.nativeElement.disabled=false;
     this.spinnerDiv.nativeElement.hidden=true;
@@ -282,6 +287,7 @@ enterIWmarks(val: number | null, programId?: string | null){
              this.but1.nativeElement.disabled=true;
              this.applicationNumber = '';
              this.marks = null;
+             this.applicantName = '';
              alert(" Interview marks entered successfully");
 
 
@@ -310,6 +316,20 @@ enterIWmarks(val: number | null, programId?: string | null){
   }
 
 }
+
+ viewCandidates()
+  {
+    this.showCandidateList = !this.showCandidateList;
+    this.myservice.getEnteredCandidates(this.selectedProgramId, this.ComponentID).subscribe(
+      (candidates: any[]) => {
+        this.candidates = candidates;
+        console.log('Entered Candidates:', this.candidates);
+      },
+      (error: any) => {
+        console.error('Error fetching entered candidates:', error);
+      }
+    );
+  }
 
 
 // showPDF()
