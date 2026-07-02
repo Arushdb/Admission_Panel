@@ -93,11 +93,19 @@
         </button>
       
       </div>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Search Candidate</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          placeholder="Search by Application No. or Name or by Date (dd-MM-yyyy)"
+        />
+      </mat-form-field>
         <mat-card *ngIf="showCandidateList && candidates && candidates.length > 0">
           <mat-card-title>Entered Candidates</mat-card-title>
 
           <mat-list>
-            <mat-list-item *ngFor="let candidate of candidates; let i = index">
+            <mat-list-item *ngFor="let candidate of candidates | candidateFilter:searchText; let i = index">
               <strong>{{ i + 1 }}.</strong>
               &nbsp;&nbsp;
               <strong>{{ candidate.applicationNo }}</strong>
@@ -105,6 +113,9 @@
               {{ candidate.applicantName }}
               &nbsp;&nbsp;
               <strong>Score:</strong> {{ candidate.score }}
+              &nbsp;&nbsp;
+             <strong>Date Entered:</strong>
+            {{ candidate.dateEntered | date: "dd-MM-yyyy" }}
             </mat-list-item>
           </mat-list>
         </mat-card>

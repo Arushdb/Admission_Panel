@@ -6,17 +6,15 @@
     <div class="card-header text-white bg-success mb-3">
       Enter Interview Marks
     </div>
-<!--    <student-info
+    <!--    <student-info
       [myvariable]="inputValue"
       (myOutput)="getData($event)"
     ></student-info>
 -->
-<mat-form-field appearance="outline" style="width: 100%">
+    <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>Select Program</mat-label>
 
-      <mat-select [(ngModel)]="selectedProgramId" 
-      name="programId"
-      >
+      <mat-select [(ngModel)]="selectedProgramId" name="programId">
         <mat-option
           *ngFor="let program of programList"
           [value]="program.programId"
@@ -26,39 +24,34 @@
       </mat-select>
     </mat-form-field>
     <p>Selected Program ID: {{ selectedProgramId }}</p>
-    <mat-form-field appearance="outline" style="width: 300px;">
-  <mat-label>Application Number</mat-label>
+    <mat-form-field appearance="outline" style="width: 300px">
+      <mat-label>Application Number</mat-label>
 
-  <input
-    matInput
-    type="text"
-    name="applicationNumber"
-    [(ngModel)]="applicationNumber"
-    #appNo
-      required
-      minlength="6"
-      (ngModelChange)="onApplicationNumberChange($event)"
-      placeholder="Enter Application Number">
- <mat-error *ngIf="appNo.errors?.required && appNo.touched">
-    Application Number is required.
-  </mat-error>
+      <input
+        matInput
+        type="text"
+        name="applicationNumber"
+        [(ngModel)]="applicationNumber"
+        #appNo
+        required
+        minlength="6"
+        (ngModelChange)="onApplicationNumberChange($event)"
+        placeholder="Enter Application Number"
+      />
+      <mat-error *ngIf="appNo.errors?.required && appNo.touched">
+        Application Number is required.
+      </mat-error>
 
-  <mat-error *ngIf="appNo.errors?.minlength && appNo.touched">
-    Application Number must be at least 6 characters long.
-  </mat-error>
- 
-</mat-form-field>
+      <mat-error *ngIf="appNo.errors?.minlength && appNo.touched">
+        Application Number must be at least 6 characters long.
+      </mat-error>
+    </mat-form-field>
 
-<mat-form-field appearance="outline" class="w-50">
-  <mat-label>Applicant Name</mat-label>
-  <input
-    matInput
-   class="bold-text"
-    [value]="applicantName"
-    readonly>
-</mat-form-field>
+    <mat-form-field appearance="outline" class="w-50">
+      <mat-label>Applicant Name</mat-label>
+      <input matInput class="bold-text" [value]="applicantName" readonly />
+    </mat-form-field>
 
-    
     <div #spinnerDiv>
       <progress-spinner></progress-spinner>
     </div>
@@ -75,13 +68,11 @@
           <input
             type="number"
             #marksVal
-                      
             [(ngModel)]="marks"
             name="marks"
             class="form-control"
             placeholder="interview marks"
             (keyup.enter)="EnterMarks()"
-           
           />
         </div>
 
@@ -95,7 +86,7 @@
             Enter Marks
           </button>
         </div>
-          <button
+        <button
           *ngIf="selectedProgramId"
           mat-raised-button
           color="primary"
@@ -105,21 +96,34 @@
           View Entered Candidates
         </button>
       </div>
-         <mat-card *ngIf="showCandidateList && candidates && candidates.length > 0">
-          <mat-card-title>Entered Candidates</mat-card-title>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Search Candidate</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          placeholder="Search by Application No. or Name or by Date (dd-MM-yyyy)"
+        />
+      </mat-form-field>
+      <mat-card
+        *ngIf="showCandidateList && candidates && candidates.length > 0"
+      >
+        <mat-card-title>Entered Candidates</mat-card-title>
 
-          <mat-list>
-            <mat-list-item *ngFor="let candidate of candidates; let i = index">
-              <strong>{{ i + 1 }}.</strong>
-              &nbsp;&nbsp;
-              <strong>{{ candidate.applicationNo }}</strong>
-              &nbsp; - &nbsp;
-              {{ candidate.applicantName }}
-              &nbsp;&nbsp;
-              <strong>Score:</strong> {{ candidate.score }}
-            </mat-list-item>
-          </mat-list>
-        </mat-card>
+        <mat-list>
+          <mat-list-item *ngFor="let candidate of candidates | candidateFilter:searchText; let i = index">
+            <strong>{{ i + 1 }}.</strong>
+            &nbsp;&nbsp;
+            <strong>{{ candidate.applicationNo }}</strong>
+            &nbsp; - &nbsp;
+            {{ candidate.applicantName }}
+            &nbsp;&nbsp;
+            <strong>Score:</strong> {{ candidate.score }}
+            &nbsp;&nbsp;
+            <strong>Date Entered:</strong>
+            {{ candidate.dateEntered | date: "dd-MM-yyyy" }}
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
     </div>
   </div>
 </div>

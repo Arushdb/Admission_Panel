@@ -8,6 +8,7 @@ import { SharedModule2 } from '../shared/shared2';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
+
 @NgModule({
   declarations: [InterviewPanelComponent],
   imports: [
@@ -16,7 +17,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     SharedModule,
     SharedModule2,
    // NgxExtendedPdfViewerModule,
-    PdfViewerModule
+    PdfViewerModule,
+   
   ]
 })
 export class InterviewPanelModule { }

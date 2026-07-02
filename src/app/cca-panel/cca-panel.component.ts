@@ -37,6 +37,7 @@ appNoInput!: ElementRef;
   programList:any; 
   ComponentID:string="CA";
    showCandidateList = false;
+    searchText = '';
      //imageUrl = '/Admission_Panel/assets/img/';
     //  imageUrl = '/assets/CCA/';
     //  base64Image: any;

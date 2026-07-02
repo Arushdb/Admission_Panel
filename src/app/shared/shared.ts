@@ -12,9 +12,10 @@ import { ExcelReportComponent } from '../excel-report/excel-report.component';
 import { MarksGridComponent } from '../marks-grid/marks-grid.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CountdownModule } from 'ngx-countdown';
+import { CandidateFilterPipe } from '../candidate-filter.pipe';
 @NgModule
 ({
-    declarations:[MenueComponent,
+    declarations:[MenueComponent,CandidateFilterPipe
       // ProgressSpinnerComponent
     //  MarksGridComponent,
     // ProgressSpinnerComponent,
@@ -38,6 +39,7 @@ import { CountdownModule } from 'ngx-countdown';
         materialLibraries,
         MenueComponent,
         CountdownModule,
+        CandidateFilterPipe,
     //     MarksGridComponent,
     //ProgressSpinnerComponent,
     // StudentInfoComponent,

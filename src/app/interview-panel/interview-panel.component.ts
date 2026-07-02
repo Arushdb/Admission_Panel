@@ -5,6 +5,7 @@ import { ProgressSpinnerComponent } from '../progress-spinner/progress-spinner.c
 import { MatDialog } from '@angular/material/dialog';
 import { WebServiceService } from '../service/web-service.service';
 import { Observable, Observer } from 'rxjs';
+import { CandidateFilterPipe } from '../candidate-filter.pipe';
 
 
 @Component({
@@ -45,6 +46,7 @@ appNoInput!: ElementRef;
   programList:any; 
   ComponentID:string="PW"; 
   showCandidateList = false;
+  searchText = '';
 
 selectedProgramId: string =""; // Variable to hold the selected program ID
 
@@ -140,33 +142,33 @@ this.myservice.validateInterview( programId,this.myAppno,"PW").subscribe(
   //   });
 }
 
-  getData(value)
-  {
-    this.myAppno=value[0].application_number;
-    this.getApplicantPrograms(this.myAppno);
-    console.log("Application Number: " + this.myAppno);
-    if(value[0].first_name!="")
-    {
-      if(value[0].marks_status=="P")
-      {
-        this.marksVal.nativeElement.disabled=true;
-        this.but1.nativeElement.disabled=true;
-        this.AppnoImage=value[0].application_number;
+  // getData(value)
+  // {
+  //   this.myAppno=value[0].application_number;
+  //   this.getApplicantPrograms(this.myAppno);
+  //   console.log("Application Number: " + this.myAppno);
+  //   if(value[0].first_name!="")
+  //   {
+  //     if(value[0].marks_status=="P")
+  //     {
+  //       this.marksVal.nativeElement.disabled=true;
+  //       this.but1.nativeElement.disabled=true;
+  //       this.AppnoImage=value[0].application_number;
         
-      }
-      else if (value[0].marks_status=="A")
-      {
-        this.Appno=value[0].application_number;
-        this.AppnoImage=value[0].application_number;
-        this.marksVal.nativeElement.disabled=false;
-        this.but1.nativeElement.disabled=false;
-        this.marksVal.nativeElement.focus();
+  //     }
+  //     else if (value[0].marks_status=="A")
+  //     {
+  //       this.Appno=value[0].application_number;
+  //       this.AppnoImage=value[0].application_number;
+  //       this.marksVal.nativeElement.disabled=false;
+  //       this.but1.nativeElement.disabled=false;
+  //       this.marksVal.nativeElement.focus();
         
-      }
+  //     }
      
-    }
+  //   }
    
-  }
+  // }
 
   EnterMarks()
   {
