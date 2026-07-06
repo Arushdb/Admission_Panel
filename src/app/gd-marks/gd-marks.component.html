@@ -1,46 +1,158 @@
 <app-menue></app-menue>
-<br>
+<br />
 
 <div class="container">
+  <div class="card">
+    <div class="card-header text-white bg-success mb-3">Enter GD Marks</div>
 
-    <div class="card" >
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Select Program</mat-label>
 
-        <div class="card-header text-white bg-success mb-3" >
-            Enter GD Marks
-           </div>
+      <mat-select [(ngModel)]="selectedProgramId" name="programId">
+        <mat-option
+          *ngFor="let program of programList"
+          [value]="program.programId"
+        >
+          {{ program.programName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Selected Program ID: {{ selectedProgramId }}</p>
+    <mat-form-field appearance="outline" style="width: 300px">
+      <mat-label>Application Number</mat-label>
 
-           <student-info [myvariable]="inputValue" (myOutput)="getData($event)"></student-info>
-           
+      <input
+        matInput
+        type="text"
+        name="applicationNumber"
+        [(ngModel)]="applicationNumber"
+        #appNo
+        required
+        minlength="6"
+        (ngModelChange)="onApplicationNumberChange($event)"
+        placeholder="Enter Application Number"
+      />
+      <mat-error *ngIf="appNo.errors?.required && appNo.touched">
+        Application Number is required.
+      </mat-error>
+
+      <mat-error *ngIf="appNo.errors?.minlength && appNo.touched">
+        Application Number must be at least 6 characters long.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-50">
+      <mat-label>Applicant Name</mat-label>
+      <input matInput class="bold-text" [value]="applicantName" readonly />
+    </mat-form-field>
+    <div #spinnerDiv>
+      <progress-spinner></progress-spinner>
+    </div>
+    <!--    <student-info [myvariable]="inputValue" (myOutput)="getData($event)"></student-info>
            <div #spinnerDiv>
            <progress-spinner></progress-spinner>
           </div>
-          
-        <!--   <div class="container" style="background-color: #92a8d1">-->
-    <div class="container" >
-            <br>
-         <div class="form-row" >
-
-            <div class="form-group col-md-3">
-                <label >GD marks</label>
-            </div>
-
-            <div class="form-group col-md-4">
-             <input type="number"   #marksVal   ngModel name = "marks" #marks="ngModel" class="form-control" placeholder="GD marks" (keyup.enter)="EnterMarks(marks.viewModel)" autofocus >
-            </div>
-
-            <div class="form-group col-md-3">
-                <button  type="button" #but1 class="btn btn-success" (click)="EnterMarks(marks.viewModel)" >Enter Marks</button>
-            </div>
-    
+          -->
+    <!--   <div class="container" style="background-color: #92a8d1">-->
+    <div class="container">
+      <br />
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label>GD marks</label>
         </div>
+
+        <div class="form-group col-md-4">
+          <input
+            type="number"
+            #marksVal
+            [(ngModel)]="marks"
+            name="marks"
+            class="form-control"
+            placeholder="GD marks"
+            (keyup.enter)="EnterMarks()"
+          />
+        </div>
+
+        <div class="form-group col-md-3">
+          <button
+            type="button"
+            #but1
+            class="btn btn-success"
+            (click)="validateIWlist()"
+          >
+            Enter Marks
+          </button>
+        </div>
+        <button
+          *ngIf="selectedProgramId"
+          mat-raised-button
+          color="primary"
+          (click)="viewCandidates()"
+        >
+          <mat-icon>list</mat-icon>
+          View Entered Candidates
+        </button>
+      
+      </div>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Search Candidate</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          placeholder="Search by Application No. or Name or by Date (dd-MM-yyyy)"
+        />
+      </mat-form-field>
+        <mat-card *ngIf="showCandidateList && candidates && candidates.length > 0">
+          <mat-card-title>Entered Candidates</mat-card-title>
+
+          <mat-list>
+            <mat-list-item *ngFor="let candidate of candidates | candidateFilter:searchText; let i = index">
+              <strong>{{ i + 1 }}.</strong>
+              &nbsp;&nbsp;
+              <strong>{{ candidate.applicationNo }}</strong>
+              &nbsp; - &nbsp;
+              {{ candidate.applicantName }}
+              &nbsp;&nbsp;
+              <strong>Score:</strong> {{ candidate.score }}
+              &nbsp;&nbsp;
+             <strong>Date Entered:</strong>
+            {{ candidate.dateEntered | date: "dd-MM-yyyy" }}
+            </mat-list-item>
+          </mat-list>
+        </mat-card>
     </div>
-    </div>
+  </div>
 </div>
 
-
-<!-- Not needed now 
 <div class="container">
-<button  type="button" class="btn btn-success" (click)="showImage()" >Show Image</button>
-<img [src]="base64Image" />
-</div>
+  <!--
+    <div class="form-row" >
+            <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageNCC()" >Show NCC</button>
+            </div>
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageNSS()" >Show NSS</button>
+           </div>
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageCCA()" >Show CCA</button>
+           </div>
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showImageSOCIAL()" >Show Social</button>
+           </div>
+           
+           <div class="form-group col-md-1">
+            <button  type="button" class="btn btn-success" (click)="showpdf()" >Show pdf</button>
+           </div>
+           
+    </div>
 -->
+  <!--
+   <div>
+    <img [src]="base64Image" />
+  </div>
+
+    <div style="height: 100%; width: 100%">
+        <pdf-viewer [src]="pdfPath" [render-text]="true" style="display: block;">
+        </pdf-viewer>
+    </div>
+    -->
+</div>

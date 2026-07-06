@@ -38,6 +38,7 @@ export class WebServiceService {
   private getstudentViewforCounclling =
     this.urlName + "/cca_int/viewDataForCouncelling.htm";
   private DoOPeration = this.urlName + "/cca_int/DoAction.htm";
+  private DoOPerationGD = this.urlName + "/cca_int/DoActionGD.htm";
   private DoOPerationforBulk = this.urlName + "/cca_int/BulkMarksPosting.htm";
   private DoOPerationforBulk_GD =
     this.urlName + "/cca_int/BulkMarksPosting_GD.htm";
@@ -424,6 +425,22 @@ private urlapplicantprograms =
 
     return this.http.post(this.DoOPeration, para, this.httpOption);
   }
+insertMarksGD(val, app, programId?: string | null) {
+    let param = JSON.stringify({
+      employee_code: sessionStorage.getItem("EmployeeCode"),
+      panel_authority: sessionStorage.getItem("Autho"),
+      flag: "GD",
+      marks: val,
+      application_number: app,
+      creator: sessionStorage.getItem("userId"),
+      program_id: programId,
+    });
+    console.log(param);
+    let para = new HttpParams({ fromObject: { courseObject: param } });
+
+    return this.http.post(this.DoOPeration, para, this.httpOption);
+  }
+
 
   EditMarks(val, app) {
     let param = JSON.stringify({
@@ -770,6 +787,23 @@ private urlapplicantprograms =
   validatefromIWlist(appno: string, programId?: string) {
     let user = sessionStorage.getItem("userId");
     let menu = sessionStorage.getItem("flag");
+
+    let para = new HttpParams();
+    para = para.set("application_number", appno);
+    para = para.set("user", user);
+    para = para.set("menu", menu);
+    if (programId) {
+      para = para.set("program_id", programId);
+    }
+    debugger;
+
+    return this.http.post(this.url_validateIWlist, para, this.httpOption);
+  }
+
+  validatefromIWlistGD(appno: string, programId?: string) {
+    let user = sessionStorage.getItem("userId");
+    let menu = sessionStorage.getItem("flag");
+    menu = "GD";
 
     let para = new HttpParams();
     para = para.set("application_number", appno);
