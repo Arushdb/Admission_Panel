@@ -51,7 +51,7 @@ export class GdMarksComponent implements OnInit {
     }
     
     ngOnInit() {
-     sessionStorage.setItem('flag','CA');
+     sessionStorage.setItem('flag','GD');
      this.getuserProgramList();
    
     }
@@ -100,7 +100,7 @@ export class GdMarksComponent implements OnInit {
       this.spinnerDiv.nativeElement.hidden=false;
     console.log('Arush Validating Program:', programId);
     debugger;
-  this.myservice.validateInterview( programId,this.myAppno,"CA").subscribe(
+  this.myservice.validateInterview( programId,this.myAppno,"GD").subscribe(
     res => {
       console.log('Validation Response:', res); 
       if(!res[0].status)
