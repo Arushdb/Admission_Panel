@@ -49,10 +49,27 @@ appNoInput!: ElementRef;
   searchText = '';
 
 selectedProgramId: string =""; // Variable to hold the selected program ID
+maxMarks: number = 8;
 
 onProgramChange() {
   console.log('Selected Program:', this.selectedProgramId);
+
+  // Program IDs for which maximum interview marks are 18
+  const programsWith18Marks = ['0001179', '0001232','0001307','0001308'];
+
+   this.maxMarks =
+    programsWith18Marks.includes(this.selectedProgramId)
+      ? 18
+      : 8;
+
+  console.log(
+    "Program ID:",
+    this.selectedProgramId,
+    "Maximum Marks:",
+    this.maxMarks
+  );
 }
+
 
    ngAfterViewInit()
   {
@@ -268,7 +285,9 @@ enterIWmarks(val: number | null, programId?: string | null){
 
   var marks = new String(val) ;
   console.log("Marks entered: " + marks);
-  if(+marks<=8)
+  console.log("Maximum marks allowed: " + this.maxMarks);
+ // if(+marks<=8)
+ if (+marks <= this.maxMarks)
   {
     this.spinnerDiv.nativeElement.hidden=false;
     //console.log(val);
@@ -314,7 +333,8 @@ enterIWmarks(val: number | null, programId?: string | null){
   else
   {
     
-    alert(" Interview marks must be equal or less than 8");
+    alert(" Interview marks must be equal or less than"+
+      this.maxMarks);
   }
 
 }

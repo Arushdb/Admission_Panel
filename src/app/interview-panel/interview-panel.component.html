@@ -14,7 +14,7 @@
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>Select Program</mat-label>
 
-      <mat-select [(ngModel)]="selectedProgramId" name="programId">
+      <mat-select [(ngModel)]="selectedProgramId" name="programId" (selectionChange)="onProgramChange()">
         <mat-option
           *ngFor="let program of programList"
           [value]="program.programId"
